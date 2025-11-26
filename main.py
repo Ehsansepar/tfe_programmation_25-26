@@ -1,12 +1,14 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
 from personnage import Personnage
+from sol import Sol
+
 
 pygame.init()
 ecran = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mon Jeu Pygame")
 clock = pygame.time.Clock()
-
+sol = Sol()
 # --- LES VARIABLES DU JOUEUR ---
 # On définit le joueur par des simples variables
 
@@ -25,6 +27,8 @@ while running:
     ecran.fill((0, 0, 0))  
 
     pygame.draw.rect(ecran, personnage.color, (personnage.x, personnage.y, personnage.width, personnage.height))
+
+    sol.afficher(ecran)
 
     pygame.display.flip()
     clock.tick(FPS)

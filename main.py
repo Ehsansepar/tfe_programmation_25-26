@@ -3,18 +3,20 @@ from config import WIDTH, HEIGHT, FPS
 from personnage import Personnage
 from menu import *
 
-# from sol import Sol
+from sol import Sol
 
 
 pygame.init()
 ecran = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mon Jeu Pygame")
 clock = pygame.time.Clock()
-# sol = Sol()
+
+
+sol = Sol(sol=pygame.Rect(0, HEIGHT-100, WIDTH, 20))
 
 personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=5)
 
-sol_bla = pygame.Rect(pygame.Rect(0, HEIGHT-100, WIDTH, 20))
+# sol_bla = pygame.Rect(pygame.Rect(0, HEIGHT-100, WIDTH, 20))
 
 finished_rect = pygame.Rect(pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100))
 
@@ -48,7 +50,7 @@ while running:
         afficher_text("END = Quitter", police, (255, 0, 0), WIDTH // 2, 10)
 
 
-        sol = pygame.draw.rect(ecran, (193, 120, 90), sol_bla)
+        pygame.draw.rect(ecran, (193, 120, 90), sol.sol)
         finished_block = pygame.draw.rect(ecran, (138, 190, 185), finished_rect)
 
 

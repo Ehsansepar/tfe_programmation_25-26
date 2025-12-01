@@ -12,7 +12,7 @@ pygame.display.set_caption("Mon Jeu Pygame")
 clock = pygame.time.Clock()
 
 
-sol = Sol(sol=pygame.Rect(0, HEIGHT-100, WIDTH, 20))
+sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
 
 personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=5)
 
@@ -50,7 +50,7 @@ while running:
         afficher_text("END = Quitter", police, (255, 0, 0), WIDTH // 2, 10)
 
 
-        pygame.draw.rect(ecran, (193, 120, 90), sol.sol)
+        pygame.draw.rect(ecran, sol.color, sol.rect)
         finished_block = pygame.draw.rect(ecran, (138, 190, 185), finished_rect)
 
 

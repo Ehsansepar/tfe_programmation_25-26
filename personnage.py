@@ -32,7 +32,7 @@ class Personnage:
 
         self.vitesse_verticale += self.gravite # Appliquer la gravité a chaque fois il augumente la vitesse verticale
         self.y += self.vitesse_verticale
-        ground_y = HEIGHT - self.height
+        ground_y = HEIGHT - 100 - self.height  # Le sol est à HEIGHT - 100
 
         if self.y >= ground_y:
             self.y = ground_y

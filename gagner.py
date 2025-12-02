@@ -60,9 +60,6 @@ class Gagner :
                 elif not self.rect_meunu.collidepoint(mouse_pos) and not self.rect_quitter.collidepoint(mouse_pos):
                     print("not hover")
                     
-            pygame.draw.rect(self.ecran, self.couleur_hover, self.rect_meunu)
-            pygame.draw.rect(self.ecran, self.couleur_hover, self.rect_quitter)
-
             self.ecran.fill((34, 139, 34))
 
 

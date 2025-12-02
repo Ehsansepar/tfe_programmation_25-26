@@ -54,7 +54,8 @@ while running:
         finished_block = pygame.draw.rect(ecran, (138, 190, 185), finished_rect)
 
 
-        if personnage.x == WIDTH-145 :
+        # if personnage.x == WIDTH-145 or personnage.y == HEIGHT-150  :
+        if personnage.x + personnage.width > finished_rect.x and personnage.x < finished_rect.x + finished_rect.width and personnage.y + personnage.height > finished_rect.y and personnage.y < finished_rect.y + finished_rect.height :
             afficher_text("END = Quitter", police, (0, 255, 0), WIDTH // 2, HEIGHT // 2)
             print("done")
             personnage.speed = 0
@@ -79,12 +80,7 @@ while running:
             running = False
 
     elif page == "menu" :
-        # ecran.fill((222, 0, 0)) 
-        # pygame.display.flip()
-
-        # for event in pygame.event.get(): # coix pour quitter 
-        #     if event.type == pygame.QUIT:
-        #         running = False
+        
         menu = Menu(ecran)
         key = pygame.key.get_pressed()
         
@@ -92,9 +88,6 @@ while running:
             # running = False
             page = menu.run_menu()
 
-        # if key[pygame.K_END] : 
-        #     running = False
-        # Menu.run_menu()
 
 
 

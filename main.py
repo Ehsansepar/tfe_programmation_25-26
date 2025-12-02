@@ -2,6 +2,7 @@ import pygame
 from config import WIDTH, HEIGHT, FPS
 from personnage import Personnage
 from menu import *
+from gagner import Gagner
 
 from sol import Sol
 
@@ -66,28 +67,29 @@ while running:
         pygame.display.flip()
         clock.tick(FPS)
 
+
+# ------------------------------------------------------------------------------
+
+
     elif page == "win" :
-        ecran.fill((222, 0, 0)) 
-        pygame.display.flip()
-
-        for event in pygame.event.get(): # coix pour quitter 
-            if event.type == pygame.QUIT:
-                running = False
-        
-        key = pygame.key.get_pressed()
-
-        if key[pygame.K_END] : 
+        page_gagner = Gagner(ecran)
+        result = page_gagner.run_gagner(personnage)
+        if result == "quit":
             running = False
+        elif result == "menu":
+            page = "menu"
+
+
+# ------------------------------------------------------------------------------
+
 
     elif page == "menu" :
         
         menu = Menu(ecran)
-        key = pygame.key.get_pressed()
-        
-        if key[pygame.K_m] : 
-            # running = False
-            page = menu.run_menu()
+        page = menu.run_menu()
 
+    elif page == "quit" :
+        running = False
 
 
 

@@ -34,8 +34,9 @@ class Gagner :
             mouse_pos = pygame.mouse.get_pos()
             mouse_clicked = pygame.mouse.get_pressed()
 
-            rect_menu = pygame.Rect(WIDTH // 2 - 100, 400, 200, 50)
-            rect_quitter = pygame.Rect(WIDTH // 2 - 100, 500, 200, 50)
+            # Boutons plus grands : largeur 300, hauteur 70
+            rect_menu = pygame.Rect(WIDTH // 2 - 150, 380, 300, 70)
+            rect_quitter = pygame.Rect(WIDTH // 2 - 150, 480, 300, 70)
             
 
             
@@ -60,26 +61,28 @@ class Gagner :
                 couleur_rect_menu = (100, 100, 100)
                 if mouse_clicked[0]:
                     print("menu clicked from gagner.py")
+                    mouse_clicked = [0, 0, 0]  # Réinitialiser l'état du clic de la souris
                     return "menu"
             
             if rect_quitter.collidepoint(mouse_pos):
                 couleur_rect_quitter = (200, 0, 0)
                 if mouse_clicked[0]:
+                    mouse_clicked = [0, 0, 0]  # Réinitialiser l'état du clic de la souris
                     print("quit clicked from gagner.py")
                     return "quit"
 
 
                     
 
-            pygame.draw.rect(self.ecran, couleur_rect_menu, rect_menu, 0, 50)
-            pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter, 0, 50)
+            pygame.draw.rect(self.ecran, couleur_rect_menu, rect_menu, 0, 20)
+            pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter, 0, 20)
 
             self.afficher_text("Félicitations !", police, (255, 215, 0), WIDTH // 2, 150)
             self.afficher_text("Vous avez gagné !", police, (255, 255, 255), WIDTH // 2, 220)
 
-            # Texte centré dans les boutons (y + hauteur/2)
-            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, 425)  # 400 + 25
-            self.afficher_text("Quitter", police, (255, 255, 255), WIDTH // 2, 525)  # 500 + 25
+            # Texte centré dans les nouveaux boutons
+            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, 415)  # 380 + 35
+            self.afficher_text("Quitter", police, (255, 255, 255), WIDTH // 2, 515)  # 480 + 35
 
             
             

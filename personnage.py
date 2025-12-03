@@ -23,7 +23,8 @@ class Personnage:
         if keys[pygame.K_RIGHT]:
             self.x += self.speed
         if keys[pygame.K_UP]:
-            self.y -= self.speed
+            # self.y -= self.speed
+            self.jump()
         if keys[pygame.K_DOWN]:
             self.y += self.speed
         if keys[pygame.K_SPACE]:

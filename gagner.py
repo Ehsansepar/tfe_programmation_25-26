@@ -37,6 +37,7 @@ class Gagner :
             rect_menu = pygame.Rect(WIDTH // 2 - 100, 400, 200, 50)
             rect_quitter = pygame.Rect(WIDTH // 2 - 100, 500, 200, 50)
             
+
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -70,16 +71,15 @@ class Gagner :
 
                     
 
-            pygame.draw.rect(self.ecran, couleur_rect_menu, rect_menu)
-            pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter)
-
-
+            pygame.draw.rect(self.ecran, couleur_rect_menu, rect_menu, 0, 50)
+            pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter, 0, 50)
 
             self.afficher_text("Félicitations !", police, (255, 215, 0), WIDTH // 2, 150)
             self.afficher_text("Vous avez gagné !", police, (255, 255, 255), WIDTH // 2, 220)
 
-            self.afficher_text("M - Retour au menu", police, (200, 200, 200), WIDTH // 2, 400)
-            self.afficher_text("END - Quitter", police, (240, 113, 103), WIDTH // 2, 500)
+            # Texte centré dans les boutons (y + hauteur/2)
+            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, 425)  # 400 + 25
+            self.afficher_text("Quitter", police, (255, 255, 255), WIDTH // 2, 525)  # 500 + 25
 
             
             

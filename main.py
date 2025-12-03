@@ -17,8 +17,6 @@ sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
 
 personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=5)
 
-# sol_bla = pygame.Rect(pygame.Rect(0, HEIGHT-100, WIDTH, 20))
-
 finished_rect = pygame.Rect(pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100))
 
 def afficher_text(text, font, text_col, x, y) :
@@ -27,6 +25,8 @@ def afficher_text(text, font, text_col, x, y) :
 
 
 police = pygame.font.SysFont('Arial', 30)
+
+police_pour_notre_cheat = pygame.font.SysFont('Arial', 20)
 
 page = "game"
 running = True
@@ -47,22 +47,28 @@ while running:
 
         pygame.draw.rect(ecran, personnage.color, (personnage.x, personnage.y, personnage.width, personnage.height))
 
-
         afficher_text("END = Quitter", police, (255, 0, 0), WIDTH // 2, 10)
-
 
         pygame.draw.rect(ecran, sol.color, sol.rect)
         finished_block = pygame.draw.rect(ecran, (138, 190, 185), finished_rect)
 
+        # === CHEAT CODE ICI (dans le bon endroit) ===
+        pos_souris = pygame.mouse.get_pos()
+        souris_est_cliquee = pygame.mouse.get_pressed()
 
-        # if personnage.x == WIDTH-145 or personnage.y == HEIGHT-150  :
+        if finished_block.collidepoint(pos_souris):
+            pygame.draw.rect(ecran, (100, 255, 0), finished_block)
+            afficher_text("Ne triche pas, flemmard ! ", police_pour_notre_cheat, (255, 100, 100), WIDTH // 2 - 150, HEIGHT // 2 - 50)
+            afficher_text("c est just pour tester gagner.py j ai flemme de faire tout le temps gagner ! 🤣", police_pour_notre_cheat, (255, 100, 100), WIDTH // 2 - 350, HEIGHT // 2 - 100)
+            if souris_est_cliquee[0]:
+                page = "win"
+        # === FIN DU CHEAT CODE ===
+
         if personnage.x + personnage.width > finished_rect.x and personnage.x < finished_rect.x + finished_rect.width and personnage.y + personnage.height > finished_rect.y and personnage.y < finished_rect.y + finished_rect.height :
             afficher_text("END = Quitter", police, (0, 255, 0), WIDTH // 2, HEIGHT // 2)
             print("done")
             personnage.speed = 0
             page = "win"
-            # exit()
-        # ecran.blit()
 
         pygame.display.flip()
         clock.tick(FPS)
@@ -88,8 +94,10 @@ while running:
         menu = Menu(ecran)
         page = menu.run_menu()
 
+
+# ------------------------------------------------------------------------------
+
+
     elif page == "quit" :
         running = False
-
-
 

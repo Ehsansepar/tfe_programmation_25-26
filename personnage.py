@@ -44,3 +44,10 @@ class Personnage:
         if not self.is_jumping:
             self.vitesse_verticale = self.puissance_saut
             self.is_jumping = True
+
+    def mettre_a_pos_initiale(self):
+        self.x = 100
+        self.y = 300
+        self.speed = 5
+        self.vitesse_verticale = 0
+        self.is_jumping = False

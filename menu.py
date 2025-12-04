@@ -61,16 +61,19 @@ class Menu :
             if self.rect_jouer.collidepoint(mouse_pos):
                 couleur_jouer = (88, 214, 141)   # Vert clair
                 if mouse_clicked[0]:
+                    mouse_clicked = (0, 0, 0)
                     return "game"
                     
             if self.rect_parametres.collidepoint(mouse_pos):
                 couleur_param = (93, 173, 226)   # Bleu clair
                 if mouse_clicked[0]:
+                    mouse_clicked = (0, 0, 0)
                     return "parametre"
                     
             if self.rect_quitter.collidepoint(mouse_pos):
                 couleur_quitter = (236, 112, 99) # Rouge clair
                 if mouse_clicked[0]:
+                    mouse_clicked = (0, 0, 0)
                     return "quit"
 
             #  (border_radius=15)

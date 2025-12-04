@@ -45,6 +45,8 @@ class Menu :
                         return "parametre"
                     elif event.key in [pygame.K_3, pygame.K_KP3] or event.unicode in ['"', '3']:
                         return "quit"
+                    elif event.key == pygame.K_l:
+                        return "level"
 
             
             self.ecran.fill((0, 129, 167)) 

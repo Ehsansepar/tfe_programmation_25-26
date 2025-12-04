@@ -4,6 +4,7 @@ from parametre import Parametre
 from personnage import Personnage
 from menu import *
 from gagner import Gagner
+from level import Level
 
 from sol import Sol
 
@@ -120,6 +121,11 @@ while running:
 # ------------------------------------------------------------------------------
 
 
-    elif page == "quit" :
-        running = False
+    elif page == "level" :
+        level = Level(ecran)
+        result = level.run_level()
+        if result == "menu":
+            page = "menu"
+        elif result == "quit":
+            running = False
 

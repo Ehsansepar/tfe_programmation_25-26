@@ -2,20 +2,22 @@ import pygame
 from config import WIDTH, HEIGHT, FPS
 from sol import Sol
 
-class Lvl01:
+class Lvl04:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
         self.personnage = personnage
         self.police = pygame.font.SysFont('Arial', 30)
         
-        # Sol
         self.sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
+        self.finished_rect = pygame.Rect(WIDTH-100, 150, 50, 100)
         
-        # Zone d'arrivée
-        self.finished_rect = pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100)
-        
-        # Pas de plateformes pour le niveau 1 (facile)
-        self.plateformes = []
+        # Zigzag
+        self.plateformes = [
+            pygame.Rect(100, 550, 150, 20),
+            pygame.Rect(400, 450, 150, 20),
+            pygame.Rect(100, 350, 150, 20),
+            pygame.Rect(400, 250, 150, 20),
+        ]
     
     def afficher_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
@@ -35,28 +37,20 @@ class Lvl01:
                     if event.key == pygame.K_l:
                         return "level"
             
-            # Mouvement
             self.personnage.move()
+            self.ecran.fill((60, 40, 80))
             
-            # Affichage
-            self.ecran.fill((30, 30, 50))
-            
-            # Sol
             pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)
-            
-            # Zone d'arrivée
+            for plat in self.plateformes:
+                pygame.draw.rect(self.ecran, (139, 90, 43), plat)
             pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
-            
-            # Personnage
             pygame.draw.rect(self.ecran, self.personnage.color, 
                            (self.personnage.x, self.personnage.y, 
                             self.personnage.width, self.personnage.height))
             
-            # Texte
-            self.afficher_text("Niveau 1", self.police, (255, 255, 255), WIDTH // 2, 30)
+            self.afficher_text("Niveau 4", self.police, (255, 255, 255), WIDTH // 2, 30)
             self.afficher_text("M = Menu | L = Niveaux", pygame.font.SysFont('Arial', 20), (200, 200, 200), WIDTH // 2, HEIGHT - 30)
             
-            # Vérifier victoire
             if self.personnage.x + self.personnage.width > self.finished_rect.x and self.personnage.x < self.finished_rect.x + self.finished_rect.width and self.personnage.y + self.personnage.height > self.finished_rect.y and self.personnage.y < self.finished_rect.y + self.finished_rect.height:
                 return "win"
             

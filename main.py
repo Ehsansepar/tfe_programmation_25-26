@@ -6,6 +6,18 @@ from menu import *
 from gagner import Gagner
 from level import Level
 
+# Import des niveaux
+from lvl.lvl01 import Lvl01
+from lvl.lvl02 import Lvl02
+from lvl.lvl03 import Lvl03
+from lvl.lvl04 import Lvl04
+from lvl.lvl05 import Lvl05
+from lvl.lvl06 import Lvl06
+from lvl.lvl07 import Lvl07
+from lvl.lvl08 import Lvl08
+from lvl.lvl09 import Lvl09
+from lvl.lvl10 import Lvl10
+
 from sol import Sol
 
 
@@ -128,4 +140,134 @@ while running:
             page = "menu"
         elif result == "quit":
             running = False
+        elif result.startswith("level"):
+            # Un niveau a été sélectionné
+            personnage.mettre_a_pos_initiale()
+            page = result  # level1, level2, etc.
 
+# ------------------------------------------------------------------------------
+
+    elif page == "level1":
+        lvl = Lvl01(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level2":
+        lvl = Lvl02(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level3":
+        lvl = Lvl03(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level4":
+        lvl = Lvl04(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level5":
+        lvl = Lvl05(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level6":
+        lvl = Lvl06(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level7":
+        lvl = Lvl07(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level8":
+        lvl = Lvl08(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level9":
+        lvl = Lvl09(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "level10":
+        lvl = Lvl10(ecran, personnage)
+        result = lvl.run()
+        if result == "menu":
+            page = "menu"
+        elif result == "level":
+            page = "level"
+        elif result == "quit":
+            running = False
+        elif result == "win":
+            page = "win"
+
+    elif page == "quit":
+        running = False
+
+pygame.quit()

@@ -29,16 +29,12 @@ class Gagner :
         global police
         running = True
 
+        # Boutons plus grands : largeur 300, hauteur 70
+        rect_menu = pygame.Rect(WIDTH // 2 - 150, 330, 300, 70)
+        rect_niveaux = pygame.Rect(WIDTH // 2 - 150, 430, 300, 70)
+        rect_quitter = pygame.Rect(WIDTH // 2 - 150, 530, 300, 70)
+
         while running:
-
-            mouse_pos = pygame.mouse.get_pos()
-            mouse_clicked = pygame.mouse.get_pressed()
-
-            # Boutons plus grands : largeur 300, hauteur 70
-            rect_menu = pygame.Rect(WIDTH // 2 - 150, 380, 300, 70)
-            rect_quitter = pygame.Rect(WIDTH // 2 - 150, 480, 300, 70)
-            
-
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -47,42 +43,67 @@ class Gagner :
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_m:
                         return "menu"
-                    
+                    elif event.key == pygame.K_l:
+                        return "level"
                     elif event.key == pygame.K_END:
+                        return "quit"
+
+                # ============================================================
+                # BONNE MÉTHODE - MOUSEBUTTONDOWN
+                # Détecte le MOMENT EXACT du clic (1 seule fois)
+                # ============================================================
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    if rect_menu.collidepoint(event.pos):
+                        print("menu clicked from gagner.py")
+                        return "menu"
+                    if rect_niveaux.collidepoint(event.pos):
+                        print("niveaux clicked from gagner.py")
+                        return "level"
+                    if rect_quitter.collidepoint(event.pos):
+                        print("quit clicked from gagner.py")
                         return "quit"
 
             self.ecran.fill((34, 139, 34))
 
-            couleur_rect_menu = (0, 0, 0)
-            couleur_rect_quitter = (255, 0, 0)
+            mouse_pos = pygame.mouse.get_pos()
+
+            couleur_rect_menu = (46, 204, 113)      # Vert
+            couleur_rect_niveaux = (155, 89, 182)    # Violet
+            couleur_rect_quitter = (231, 76, 60)     # Rouge
 
 
             if rect_menu.collidepoint(mouse_pos):
-                couleur_rect_menu = (100, 100, 100)
-                if mouse_clicked[0]:
-                    print("menu clicked from gagner.py")
-                    mouse_clicked = [0, 0, 0]  # Réinitialiser l'état du clic de la souris
-                    return "menu"
+                couleur_rect_menu = (88, 214, 141)   # Vert clair
+            
+            if rect_niveaux.collidepoint(mouse_pos):
+                couleur_rect_niveaux = (187, 143, 206)  # Violet clair
             
             if rect_quitter.collidepoint(mouse_pos):
-                couleur_rect_quitter = (200, 0, 0)
-                if mouse_clicked[0]:
-                    mouse_clicked = [0, 0, 0]  # Réinitialiser l'état du clic de la souris
-                    print("quit clicked from gagner.py")
-                    return "quit"
+                couleur_rect_quitter = (236, 112, 99)  # Rouge clair
 
-
-                    
+            # ============================================================
+            # ANCIENNE MÉTHODE (TA MÉTHODE) - NE FONCTIONNE PAS BIEN
+            # Problème: get_pressed() détecte si le bouton est MAINTENU enfoncé
+            # Donc le clic reste actif sur plusieurs frames et plusieurs pages
+            # ============================================================
+            # mouse_clicked = pygame.mouse.get_pressed()
+            # if rect_menu.collidepoint(mouse_pos):
+            #     if mouse_clicked[0]:
+            #         mouse_clicked = [0, 0, 0]  # ça ne réinitialise pas vraiment le clic!
+            #         return "menu"
+            # ============================================================
 
             pygame.draw.rect(self.ecran, couleur_rect_menu, rect_menu, 0, 20)
+            pygame.draw.rect(self.ecran, couleur_rect_niveaux, rect_niveaux, 0, 20)
             pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter, 0, 20)
 
             self.afficher_text("Félicitations !", police, (255, 215, 0), WIDTH // 2, 150)
             self.afficher_text("Vous avez gagné !", police, (255, 255, 255), WIDTH // 2, 220)
 
             # Texte centré dans les nouveaux boutons
-            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, 415)  # 380 + 35
-            self.afficher_text("Quitter", police, (255, 255, 255), WIDTH // 2, 515)  # 480 + 35
+            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, 365)
+            self.afficher_text("Niveaux", police, (255, 255, 255), WIDTH // 2, 465)
+            self.afficher_text("Quitter", police, (255, 255, 255), WIDTH // 2, 565)
 
             
             

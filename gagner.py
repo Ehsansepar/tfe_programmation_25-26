@@ -12,10 +12,6 @@ class Gagner :
 
         self.finished_rect = pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100)
         
-        # self.rect_meunu = pygame.Rect(WIDTH // 2 - 100, 400, 200, 50)
-        # self.rect_quitter = pygame.Rect(WIDTH // 2 - 100, 500, 200, 50)
-
-        # self.couleur_hover = (200, 200, 200)
         return
     
 
@@ -29,7 +25,6 @@ class Gagner :
         global police
         running = True
 
-        # Boutons plus grands : largeur 300, hauteur 70
         rect_menu = pygame.Rect(WIDTH // 2 - 150, 330, 300, 70)
         rect_niveaux = pygame.Rect(WIDTH // 2 - 150, 430, 300, 70)
         rect_quitter = pygame.Rect(WIDTH // 2 - 150, 530, 300, 70)
@@ -49,7 +44,7 @@ class Gagner :
                         return "quit"
 
                 # ============================================================
-                # BONNE MÉTHODE - MOUSEBUTTONDOWN
+                #MOUSEBUTTONDOWN
                 # Détecte le MOMENT EXACT du clic (1 seule fois)
                 # ============================================================
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -58,6 +53,7 @@ class Gagner :
                         return "menu"
                     if rect_niveaux.collidepoint(event.pos):
                         print("niveaux clicked from gagner.py")
+                        print("return level")
                         return "level"
                     if rect_quitter.collidepoint(event.pos):
                         print("quit clicked from gagner.py")

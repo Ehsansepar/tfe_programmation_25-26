@@ -1,7 +1,7 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
 from sol import Sol
-
+from personnage import Personnage
 class Lvl02:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
@@ -16,6 +16,7 @@ class Lvl02:
         
         self.plateformes = [
             pygame.Rect(300, 500, 200, 20),
+            # pygame.Rect(200, 300, 100, 100)
         ]
 
         self.rect_menu = pygame.Rect(20, 20, 100, 40)
@@ -48,17 +49,29 @@ class Lvl02:
 
             self.personnage.move()
 
-            player_rect = pygame.Rect(self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height)
+            # player_rect = pygame.Rect(self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height)
             
-            for plat in self.plateformes:
-                if player_rect.colliderect(plat):
-                    # On vérifie si on arrive par le HAUT (chute)
-                    # On regarde si les pieds étaient au-dessus du milieu de la plateforme
-                    if self.personnage.vitesse_verticale > 0 and self.personnage.y + self.personnage.height < plat.y + 35: 
-                        self.personnage.y = plat.y - self.personnage.height
-                        self.personnage.vitesse_verticale = 0  # Stop la gravité
-                        self.personnage.is_jumping = False
+            # for plat in self.plateformes:
+            #     if player_rect.colliderect(plat):
+            #         # On vérifie si on arrive par le HAUT (chute)
+            #         # On regarde si les pieds étaient au-dessus du milieu de la plateforme
+            #         if self.personnage.vitesse_verticale > 0 and self.personnage.y + self.personnage.height < plat.y + 35: 
+            #             self.personnage.y = plat.y - self.personnage.height
+            #             self.personnage.vitesse_verticale = 0  # Stop la gravité
+            #             self.personnage.is_jumping = False
             
+
+            self.personnage.verifier_platforme(self.plateformes)
+
+            # for plat in self.plateformes:
+            #     if self.personnage.player_rect.colliderect(plat):
+
+            #         if self.personnage.vitesse_verticale > 0:
+            #             self.personnage.y = plat.y - self.personnage.height
+            #             self.personnage.vitesse_verticale = 0
+            #             self.personnage.is_jumping = False
+
+
             self.ecran.fill((40, 30, 60)) # 
             
            #hover

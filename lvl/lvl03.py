@@ -2,6 +2,9 @@ import pygame
 from config import WIDTH, HEIGHT, FPS
 from sol import Sol
 
+from personnage import Personnage
+
+
 class Lvl03:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
@@ -12,6 +15,8 @@ class Lvl03:
         self.sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
         self.finished_rect = pygame.Rect(WIDTH-100, 200, 50, 100)
         
+        
+
         # Escalier
         self.plateformes = [
             pygame.Rect(200, 550, 150, 20),
@@ -48,6 +53,18 @@ class Lvl03:
                         return "level"
             
             self.personnage.move()
+            
+
+            self.personnage.verifier_platforme(self.plateformes)
+
+            # for plat in self.plateformes:
+            #     if self.personnage.player_rect.colliderect(plat):
+                    
+            #         if self.personnage.vitesse_verticale > 0:
+            #             self.personnage.y = plat.y - self.personnage.height
+            #             self.personnage.vitesse_verticale = 0
+            #             self.personnage.is_jumping = False
+            
             self.ecran.fill((50, 30, 70))
             
             # Hover boutons

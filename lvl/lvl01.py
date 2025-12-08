@@ -1,7 +1,7 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
 from sol import Sol
-
+from personnage import Personnage
 class Lvl01:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
@@ -48,7 +48,7 @@ class Lvl01:
             
             # Mouvement
             self.personnage.move()
-            
+            self.personnage.verifier_platforme(self.plateformes)
             # Affichage
             self.ecran.fill((30, 30, 50))
             

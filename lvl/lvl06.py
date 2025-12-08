@@ -1,6 +1,7 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
 from sol import Sol
+from personnage import Personnage
 
 class Lvl06:
     def __init__(self, ecran, personnage):
@@ -49,6 +50,7 @@ class Lvl06:
                         return "level"
             
             self.personnage.move()
+            self.personnage.verifier_platforme(self.plateformes)
             self.ecran.fill((80, 60, 100))
             
             # Hover boutons

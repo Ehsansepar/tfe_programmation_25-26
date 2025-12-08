@@ -100,6 +100,8 @@ while running:
             running = False
         elif result == "menu":
             page = "menu"
+        elif result == "level" :
+            page = "level"
 
 
 # ------------------------------------------------------------------------------
@@ -140,10 +142,13 @@ while running:
             page = "menu"
         elif result == "quit":
             running = False
-        elif result.startswith("level"):
-            # Un niveau a été sélectionné
+        # elif result.startswith("level"): #il charche le mots en premier de phrase 
+        #     # https://www.w3schools.com/python/ref_string_startswith.asp
+        #     personnage.mettre_a_pos_initiale()
+        #     page = result
+        else :
             personnage.mettre_a_pos_initiale()
-            page = result  # level1, level2, etc.
+            page = result
 
 # ------------------------------------------------------------------------------
 

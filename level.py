@@ -13,14 +13,14 @@ class Level:
         global police
         police = pygame.font.SysFont('comicsansms', 40, bold=True)
 
-        # Ligne 1 (niveaux 1-5)
+
         self.rect_level1 = pygame.Rect(WIDTH // 2 - 270, HEIGHT // 2 - 80, 80, 80)
         self.rect_level2 = pygame.Rect(WIDTH // 2 - 170, HEIGHT // 2 - 80, 80, 80)
         self.rect_level3 = pygame.Rect(WIDTH // 2 - 70, HEIGHT // 2 - 80, 80, 80)
         self.rect_level4 = pygame.Rect(WIDTH // 2 + 30, HEIGHT // 2 - 80, 80, 80)
         self.rect_level5 = pygame.Rect(WIDTH // 2 + 130, HEIGHT // 2 - 80, 80, 80)
         
-        # Ligne 2 (niveaux 6-10)
+
         self.rect_level6 = pygame.Rect(WIDTH // 2 - 270, HEIGHT // 2 + 20, 80, 80)
         self.rect_level7 = pygame.Rect(WIDTH // 2 - 170, HEIGHT // 2 + 20, 80, 80)
         self.rect_level8 = pygame.Rect(WIDTH // 2 - 70, HEIGHT // 2 + 20, 80, 80)
@@ -29,7 +29,7 @@ class Level:
 
         self.rect_aller_menu = pygame.Rect(WIDTH // 2 - 150, HEIGHT - 100, 300, 60)
         
-        # Couleurs différentes pour chaque niveau
+
         self.couleur1 = (46, 204, 113)    # Vert
         self.couleur2 = (52, 152, 219)    # Bleu
         self.couleur3 = (155, 89, 182)    # Violet

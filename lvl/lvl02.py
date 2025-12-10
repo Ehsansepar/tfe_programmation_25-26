@@ -1,7 +1,7 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
-from sol import Sol
-from personnage import Personnage
+from classes.sol import Sol
+from classes.personnage import Personnage
 class Lvl02:
     def __init__(self, ecran, personnage):
         self.ecran = ecran

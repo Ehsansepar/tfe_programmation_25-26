@@ -1,10 +1,11 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
-from parametre import Parametre
-from personnage import Personnage
-from menu import *
-from gagner import Gagner
-from level import Level
+from classes.parametre import Parametre
+from classes.personnage import Personnage
+from classes.menu import *
+from classes.gagner import Gagner
+from classes.level import Level
+from classes.sol import Sol
 
 # Import des niveaux
 from lvl.lvl01 import Lvl01
@@ -17,8 +18,6 @@ from lvl.lvl07 import Lvl07
 from lvl.lvl08 import Lvl08
 from lvl.lvl09 import Lvl09
 from lvl.lvl10 import Lvl10
-
-from sol import Sol
 
 
 pygame.init()

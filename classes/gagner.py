@@ -1,7 +1,7 @@
 import pygame
 from config import WIDTH, HEIGHT, FPS
-from personnage import Personnage
-from sol import Sol
+from classes.personnage import Personnage
+from classes.sol import Sol
 
 class Gagner :
     def __init__(self, ecran) :

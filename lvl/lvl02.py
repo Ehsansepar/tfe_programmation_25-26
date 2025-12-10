@@ -10,14 +10,23 @@ class Lvl02:
         self.police = pygame.font.SysFont('Arial', 20, bold=True)
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
         
-        self.sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
-        self.finished_rect = pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100)
+        # Sol TRÈS LONG (3000 pixels au lieu de 800)
+        self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
         
+        # Arrivée TRÈS LOIN
+        self.finished_rect = pygame.Rect(2500, HEIGHT-150, 50, 100)
         
+        # Plateformes dans le monde
         self.plateformes = [
             pygame.Rect(300, 500, 200, 20),
-            # pygame.Rect(200, 300, 100, 100)
+            pygame.Rect(700, 450, 200, 20),
+            pygame.Rect(1100, 400, 200, 20),
+            pygame.Rect(1500, 350, 200, 20),
+            pygame.Rect(1900, 300, 200, 20),
         ]
+        
+        # === CAMERA ===
+        self.camera_x = 0
 
         self.rect_menu = pygame.Rect(20, 20, 100, 40)
         self.rect_niveaux = pygame.Rect(WIDTH - 120, 20, 100, 40)
@@ -63,13 +72,10 @@ class Lvl02:
 
             self.personnage.verifier_platforme(self.plateformes)
 
-            # for plat in self.plateformes:
-            #     if self.personnage.player_rect.colliderect(plat):
-
-            #         if self.personnage.vitesse_verticale > 0:
-            #             self.personnage.y = plat.y - self.personnage.height
-            #             self.personnage.vitesse_verticale = 0
-            #             self.personnage.is_jumping = False
+            # === CAMERA : suit le joueur ===
+            self.camera_x = self.personnage.x - WIDTH // 2
+            if self.camera_x < 0:
+                self.camera_x = 0  # Pas aller trop à gauche
 
 
             self.ecran.fill((40, 30, 60)) # 
@@ -102,19 +108,25 @@ class Lvl02:
             self.afficher_text("Niveau 2", self.police_titre, (255, 255, 255), WIDTH // 2, 40)
 
 
-   
-            pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)
+            # === DESSIN AVEC CAMERA ===
+            # Sol (position - camera)
+            pygame.draw.rect(self.ecran, self.sol.color, 
+                           (self.sol.rect.x - self.camera_x, self.sol.rect.y, 
+                            self.sol.rect.width, self.sol.rect.height))
             
-            # Plateformes
+            # Plateformes (position - camera)
             for plat in self.plateformes:
-                pygame.draw.rect(self.ecran, (139, 90, 43), plat)
+                pygame.draw.rect(self.ecran, (139, 90, 43), 
+                               (plat.x - self.camera_x, plat.y, plat.width, plat.height))
             
-            #quand j arrive et je gagne
-            pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
+            # Zone arrivée (position - camera)
+            pygame.draw.rect(self.ecran, (138, 190, 185), 
+                           (self.finished_rect.x - self.camera_x, self.finished_rect.y,
+                            self.finished_rect.width, self.finished_rect.height))
             
-
+            # Joueur (position - camera)
             pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x, self.personnage.y, 
+                           (self.personnage.x - self.camera_x, self.personnage.y, 
                             self.personnage.width, self.personnage.height))
             
             # Vérifier victoire

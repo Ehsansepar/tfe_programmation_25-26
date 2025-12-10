@@ -78,7 +78,7 @@ class Lvl02:
                 self.camera_x = 0  # Pas aller trop à gauche
 
 
-            self.ecran.fill((40, 30, 60)) # 
+            self.ecran.fill((40, 30, 60)) 
             
            #hover
             mouse_pos = pygame.mouse.get_pos()

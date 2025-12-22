@@ -10,17 +10,23 @@ class Lvl01:
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
         
         # Sol
-        self.sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
+        self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
         
-        # Zone d'arrivée
-        self.finished_rect = pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100)
+
+        self.finished_rect = pygame.Rect(3000-100, HEIGHT-150, 50, 100)
         
-        # Pas de plateformes pour le niveau 1 (facile)
-        self.plateformes = []
+        self.decalage = 0
+
         
-        # Boutons Menu et Niveaux
-        self.rect_menu = pygame.Rect(20, 20, 100, 40)
-        self.rect_niveaux = pygame.Rect(WIDTH - 120, 20, 100, 40)
+        self.plateformes = [
+            pygame.Rect(300, 500, 200, 20),
+            pygame.Rect(700, 450, 200, 20),
+            pygame.Rect(1100, 400, 200, 20),
+            pygame.Rect(1500, 350, 200, 20),
+            pygame.Rect(1900, 300, 200, 20),
+            ]
+        
+        self.camera_x = 0
     
     def afficher_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
@@ -46,47 +52,71 @@ class Lvl01:
                     if self.rect_niveaux.collidepoint(event.pos):
                         return "level"
             
-            # Mouvement
+
             self.personnage.move()
+
             self.personnage.verifier_platforme(self.plateformes)
-            # Affichage
+
+
+            
+            self.camera_x = self.personnage.x - WIDTH // 2
+            if self.camera_x < 0:
+                self.camera_x = 0
+
+
             self.ecran.fill((30, 30, 50))
-            
-            # Hover boutons
-            mouse_pos = pygame.mouse.get_pos()
-            col_menu = (46, 204, 113)  # Vert
-            col_niveaux = (155, 89, 182)  # Violet
-            if self.rect_menu.collidepoint(mouse_pos):
-                col_menu = (88, 214, 141)
-            if self.rect_niveaux.collidepoint(mouse_pos):
-                col_niveaux = (187, 143, 206)
-            
-            # Dessiner boutons
-            pygame.draw.rect(self.ecran, col_menu, self.rect_menu, border_radius=10)
-            pygame.draw.rect(self.ecran, (255, 255, 255), self.rect_menu, 2, border_radius=10)
-            self.afficher_text("MENU", self.police, (255, 255, 255), self.rect_menu.centerx, self.rect_menu.centery)
-            
-            pygame.draw.rect(self.ecran, col_niveaux, self.rect_niveaux, border_radius=10)
-            pygame.draw.rect(self.ecran, (255, 255, 255), self.rect_niveaux, 2, border_radius=10)
-            self.afficher_text("LEVELS", self.police, (255, 255, 255), self.rect_niveaux.centerx, self.rect_niveaux.centery)
             
             # Titre
             self.afficher_text("Niveau 1", self.police_titre, (255, 255, 255), WIDTH // 2, 40)
             
+
+# ------------------------------------------------------------------------------------------------------------------
+
+            # --- VISUALISATION DES ÉCRANS (POUR COMPRENDRE) ---
+            # On dessine des cadres rouges pour montrer les "écrans" virtuels
+            couleur_debug = (255, 0, 0) # Rouge
+            for i in range(5): # On affiche 5 écrans
+                pos_x_ecran = i * WIDTH # 0, 800, 1600, 2400...
+                
+                # Dessiner le cadre de l'écran
+                pygame.draw.rect(self.ecran, couleur_debug, 
+                               (pos_x_ecran - self.camera_x, 0, WIDTH, HEIGHT), 5) # 5 = épaisseur du trait
+                
+                # Écrire le numéro de l'écran
+                self.afficher_text(f"ECRAN {i+1}", self.police_titre, couleur_debug, 
+                                 pos_x_ecran - self.camera_x + WIDTH // 2, 100)
+            # --------------------------------------------------
+
+# ------------------------------------------------------------------------------------------------------------------
+
+
+
             # Sol
-            pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)
+            pygame.draw.rect(self.ecran, self.sol.color, (self.sol.rect.x - self.camera_x, self.sol.rect.y, 
+                                                   self.sol.rect.width, self.sol.rect.height))
             
+            # Plateformes
+            for plateforme in self.plateformes:
+                pygame.draw.rect(self.ecran, (100, 100, 100), 
+                               (plateforme.x - self.camera_x, plateforme.y, 
+                                plateforme.width, plateforme.height))
+
             # Zone d'arrivée
-            pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
+            pygame.draw.rect(self.ecran, (138, 190, 185), (self.finished_rect.x - self.camera_x, self.finished_rect.y, 
+                                                   self.finished_rect.width, self.finished_rect.height))
             
             # Personnage
             pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x, self.personnage.y, 
+                           (self.personnage.x - self.camera_x, self.personnage.y, 
                             self.personnage.width, self.personnage.height))
             
+            
             # Vérifier victoire
-            if self.personnage.x + self.personnage.width > self.finished_rect.x and self.personnage.x < self.finished_rect.x + self.finished_rect.width and self.personnage.y + self.personnage.height > self.finished_rect.y and self.personnage.y < self.finished_rect.y + self.finished_rect.height:
+            personnage_rect = pygame.Rect(self.personnage.x, self.personnage.y, 
+                                         self.personnage.width, self.personnage.height)
+            if personnage_rect.colliderect(self.finished_rect):
                 return "win"
+            
             
             pygame.display.flip()
             clock.tick(FPS)

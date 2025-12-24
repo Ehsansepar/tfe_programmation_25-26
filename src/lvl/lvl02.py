@@ -6,18 +6,13 @@ class Lvl02:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
         self.personnage = personnage
-        self.police = pygame.font.SysFont('Arial', 30)
         self.police = pygame.font.SysFont('Arial', 20, bold=True)
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
-        
-        # Sol TRÈS LONG (3000 pixels au lieu de 800)
+    
         self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
         
-        # Arrivée TRÈS LOIN
         self.finished_rect = pygame.Rect(2500, HEIGHT-150, 50, 100)
-        self.finished_rect = pygame.Rect()
-        
-        # Plateformes dans le monde
+
         self.plateformes = [
             pygame.Rect(300, 500, 200, 20),
             pygame.Rect(700, 450, 200, 20),
@@ -26,8 +21,6 @@ class Lvl02:
             pygame.Rect(1900, 300, 200, 20),
         ]
         
-        # === CAMERA ===
-        self.camera_x = 0
 
         self.rect_menu = pygame.Rect(20, 20, 100, 40)
         self.rect_niveaux = pygame.Rect(WIDTH - 120, 20, 100, 40)
@@ -55,9 +48,6 @@ class Lvl02:
                         return "menu"
                     if self.rect_niveaux.collidepoint(event.pos):
                         return "level"
-            
-
-            self.personnage.move()
 
             # player_rect = pygame.Rect(self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height)
             
@@ -71,6 +61,7 @@ class Lvl02:
             #             self.personnage.is_jumping = False
             
 
+            self.personnage.move()
             self.personnage.verifier_platforme(self.plateformes)
 
             self.milieu_ecran = WIDTH // 2
@@ -79,54 +70,39 @@ class Lvl02:
             if self.personnage.x > self.milieu_ecran :
                 self.decalage = self.personnage.x - self.milieu_ecran
                 self.personnage.x = self.milieu_ecran
+            
+            elif self.personnage.x < self.milieu_ecran and self.sol.rect.x < 0:
+                self.decalage = self.personnage.x - self.milieu_ecran
+                self.personnage.x = self.milieu_ecran
 
+            if self.decalage != 0 :
                 self.finished_rect.x -= self.decalage
+                self.sol.rect.x -= self.decalage
 
-                for plat in self.plateformes :
+                for plat in self.plateformes:
                     plat.x = plat.x - self.decalage
 
             self.ecran.fill((40, 30, 60)) 
-            
-           #hover
-            mouse_pos = pygame.mouse.get_pos()
-            
-            
-            col_menu = (70, 70, 70)
-            col_niveaux = (70, 70, 70)
-            
-            if self.rect_menu.collidepoint(mouse_pos):
-                col_menu = (243, 156, 18)
-            
-            if self.rect_niveaux.collidepoint(mouse_pos):
-                col_niveaux = (120, 120, 120)
-
 
             self.afficher_text("Niveau 2", self.police_titre, (255, 255, 255), WIDTH // 2, 40)
 
 
-            # === DESSIN AVEC CAMERA ===
-            # Sol (position - camera)
-            pygame.draw.rect(self.ecran, self.sol.color, 
-                           (self.sol.rect.x, self.sol.rect.y, 
-                            self.sol.rect.width, self.sol.rect.height))
+            pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)
             
-            # Plateformes (position - camera)
             for plat in self.plateformes:
                 pygame.draw.rect(self.ecran, (139, 90, 43), plat)
     
 
             pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
             
-            # Joueur (position - camera)
-            pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x, self.personnage.y, 
-                            self.personnage.width, self.personnage.height))
-
-            self.rect_pesronnage = pygame.Rect(self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height)
-
-            # Vérifier victoire
-            if self.rect_pesronnage.colliderect(self.finished_rect):
-                return "win"
             
+            
+            pygame.draw.rect(self.ecran, self.personnage.color, (self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height))
+
+            player_rect = pygame.Rect(self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height)
+
+            if player_rect.colliderect(self.finished_rect):
+                return "win"
+
             pygame.display.flip()
             clock.tick(FPS)

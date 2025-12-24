@@ -103,6 +103,8 @@ class Lvl02:
 
             if player_rect.colliderect(self.finished_rect):
                 return "win"
+            
+            print(self.sol.rect.x)
 
             pygame.display.flip()
             clock.tick(FPS)

@@ -8,8 +8,7 @@ class Lvl01:
         self.personnage = personnage
         self.police = pygame.font.SysFont('Arial', 20, bold=True)
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
-        
-        # Sol
+
         self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
         
 
@@ -25,8 +24,6 @@ class Lvl01:
             pygame.Rect(1500, 350, 200, 20),
             pygame.Rect(1900, 300, 200, 20),
             ]
-        
-        self.camera_x = 0
     
     def afficher_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
@@ -115,8 +112,6 @@ class Lvl01:
                            (self.personnage.x - self.camera_x, self.personnage.y, 
                             self.personnage.width, self.personnage.height))
             
-            
-            # Vérifier victoire
             personnage_rect = pygame.Rect(self.personnage.x, self.personnage.y, 
                                          self.personnage.width, self.personnage.height)
             if personnage_rect.colliderect(self.finished_rect):

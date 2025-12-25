@@ -3,6 +3,7 @@ from data.config import *
 
 
 pygame.init()
+pygame.mixer.init()
 
 global police
 
@@ -21,17 +22,23 @@ class Menu :
         self.rect_quitter = pygame.Rect(WIDTH // 2 - 150, 545, 300, 60)
 
 
+        self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
+        
+
+        self.son_hover.set_volume(0.5) # 50% le sons 
         return
     
     def afficher_text(self, text, font, text_col, x, y) :
         img = font.render(text, True, text_col)
         rect = img.get_rect(center=(x, y))
         self.ecran.blit(img, rect)
-
+    
     def run_menu(self) :
 
         global police
         running = True
+
+        memoire_bouton = ""
 
         while running :
             for event in pygame.event.get():
@@ -75,32 +82,49 @@ class Menu :
             couleur_param = (52, 152, 219)       # Bleu
             couleur_quitter = (231, 76, 60)      # Rouge
 
+
             #  hover 
+
+            je_suis_sur_un_bouton = False
+
             if self.rect_jouer.collidepoint(mouse_pos):
                 couleur_jouer = (88, 214, 141)   # Vert clair
+                je_suis_sur_un_bouton = True
+                if memoire_bouton != "jouer" :
+                    self.son_hover.play()   
+                    memoire_bouton = "jouer"
 
             if self.rect_niveaux.collidepoint(mouse_pos):
                 couleur_niveaux = (187, 143, 206) # Violet clair
+                je_suis_sur_un_bouton = True
+
+                if memoire_bouton != "niveau" :
+                    self.son_hover.play()
+                    memoire_bouton = "niveau"
+
                     
             if self.rect_parametres.collidepoint(mouse_pos):
                 couleur_param = (93, 173, 226)   # Bleu clair
+                je_suis_sur_un_bouton = True
+
+                if memoire_bouton != "parametre" :
+                    self.son_hover.play()
+                    memoire_bouton = "parametre"
+
                     
             if self.rect_quitter.collidepoint(mouse_pos):
                 couleur_quitter = (236, 112, 99) # Rouge clair
+                je_suis_sur_un_bouton = True
 
-            # ============================================================
-            # ANCIENNE MÉTHODE (TA MÉTHODE) - NE FONCTIONNE PAS BIEN
-            # Problème: get_pressed() détecte si le bouton est MAINTENU enfoncé
-            # Donc le clic reste actif sur plusieurs frames et plusieurs pages
-            # ============================================================
-            # mouse_clicked = pygame.mouse.get_pressed()
-            # if self.rect_jouer.collidepoint(mouse_pos):
-            #     if mouse_clicked[0]:
-            #         mouse_clicked = (0, 0, 0)  # ça ne réinitialise pas vraiment le clic!
-            #         return "game"
-            # ============================================================
+                if memoire_bouton != "quit" :
+                    self.son_hover.play()
+                    memoire_bouton = "quit"
 
-            #  (border_radius=15)
+
+            if je_suis_sur_un_bouton == False : 
+                memoire_bouton = ""
+
+
             pygame.draw.rect(self.ecran, couleur_jouer, self.rect_jouer, 0, 15)
             pygame.draw.rect(self.ecran, couleur_niveaux, self.rect_niveaux, 0, 15)
             pygame.draw.rect(self.ecran, couleur_param, self.rect_parametres, 0, 15)

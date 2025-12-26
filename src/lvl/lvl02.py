@@ -2,6 +2,10 @@ import pygame
 from data.config import WIDTH, HEIGHT, FPS
 from classes.sol import Sol
 from classes.personnage import Personnage
+
+
+pygame.init()
+
 class Lvl02:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
@@ -24,6 +28,8 @@ class Lvl02:
 
         self.rect_menu = pygame.Rect(20, 20, 100, 40)
         self.rect_niveaux = pygame.Rect(WIDTH - 120, 20, 100, 40)
+
+
     
     def afficher_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)

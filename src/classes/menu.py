@@ -23,9 +23,11 @@ class Menu :
 
 
         self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
+        self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
         
 
         self.son_hover.set_volume(0.5) # 50% le sons 
+        self.son_back.set_volume(0.5)
         return
     
     def afficher_text(self, text, font, text_col, x, y) :
@@ -63,12 +65,19 @@ class Menu :
                 # ============================================================
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.rect_jouer.collidepoint(event.pos):
+                        self.son_back.play()
                         return "game"
+                    
                     if self.rect_niveaux.collidepoint(event.pos):
+                        self.son_back.play()
                         return "level"
+                    
                     if self.rect_parametres.collidepoint(event.pos):
+                        self.son_back.play()
                         return "parametre"
+                    
                     if self.rect_quitter.collidepoint(event.pos):
+                        self.son_back.play()
                         return "quit"
 
             

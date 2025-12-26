@@ -21,6 +21,7 @@ from lvl.lvl10 import Lvl10
 
 
 pygame.init()
+# ecran = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 ecran = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mon Jeu Pygame")
 clock = pygame.time.Clock()

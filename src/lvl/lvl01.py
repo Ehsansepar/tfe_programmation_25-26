@@ -63,6 +63,10 @@ class Lvl01:
                 self.decalage = self.personnage.x - self.milieu_ecran
                 self.personnage.x = self.milieu_ecran
 
+            elif self.personnage < self.milieu_ecran and self.sol.rect.x < 0:
+                self.decalage = self.personnage - self.milieu_ecran
+                self.personnage.x = self.milieu_ecran
+
                 self.finished_rect.x = self.finished_rect.x - self.decalage
 
 
@@ -70,32 +74,10 @@ class Lvl01:
             
             # Titre
             self.afficher_text("Niveau 1", self.police_titre, (255, 255, 255), WIDTH // 2, 40)
-            
-
-# ------------------------------------------------------------------------------------------------------------------
-
-            # --- VISUALISATION DES ÉCRANS (POUR COMPRENDRE) ---
-            # On dessine des cadres rouges pour montrer les "écrans" virtuels
-            couleur_debug = (255, 0, 0) # Rouge
-            for i in range(5): # On affiche 5 écrans
-                pos_x_ecran = i * WIDTH # 0, 800, 1600, 2400...
-                
-                # Dessiner le cadre de l'écran
-                pygame.draw.rect(self.ecran, couleur_debug, 
-                               (pos_x_ecran - self.camera_x, 0, WIDTH, HEIGHT), 5) # 5 = épaisseur du trait
-                
-                # Écrire le numéro de l'écran
-                self.afficher_text(f"ECRAN {i+1}", self.police_titre, couleur_debug, 
-                                 pos_x_ecran - self.camera_x + WIDTH // 2, 100)
-            # --------------------------------------------------
-
-# ------------------------------------------------------------------------------------------------------------------
-
 
 
             # Sol
-            pygame.draw.rect(self.ecran, self.sol.color, (self.sol.rect.x - self.decalage, self.sol.rect.y, 
-                                                   self.sol.rect.width, self.sol.rect.height))
+            pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)
             
             # Plateformes
             for plateforme in self.plateformes:
@@ -103,13 +85,12 @@ class Lvl01:
                                (plateforme.x, plateforme.y, 
                                 plateforme.width, plateforme.height))
 
-            # Zone d'arrivée
-            pygame.draw.rect(self.ecran, (138, 190, 185), (self.finished_rect.x - self.decalage, self.finished_rect.y, 
-                                                   self.finished_rect.width, self.finished_rect.height))
+
+            pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
             
             # Personnage
             pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x - self.camera_x, self.personnage.y, 
+                           (self.personnage.x, self.personnage.y, 
                             self.personnage.width, self.personnage.height))
             
             personnage_rect = pygame.Rect(self.personnage.x, self.personnage.y, 

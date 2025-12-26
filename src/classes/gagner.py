@@ -3,6 +3,10 @@ from data.config import WIDTH, HEIGHT, FPS
 from classes.personnage import Personnage
 from classes.sol import Sol
 
+
+pygame.init()
+pygame.mixer.init()
+
 class Gagner :
     def __init__(self, ecran) :
         self.ecran = ecran
@@ -12,6 +16,13 @@ class Gagner :
 
         self.finished_rect = pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100)
         
+
+        self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
+        self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
+
+        self.son_back.set_volume(0.5)
+        self.son_hover.set_volume(0.5)
+
         return
     
 
@@ -24,6 +35,8 @@ class Gagner :
 
         global police
         running = True
+
+        memoire_bouton = ""
 
         rect_menu = pygame.Rect(WIDTH // 2 - 150, 330, 300, 70)
         rect_niveaux = pygame.Rect(WIDTH // 2 - 150, 430, 300, 70)
@@ -49,13 +62,18 @@ class Gagner :
                 # ============================================================
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if rect_menu.collidepoint(event.pos):
+                        self.son_back.play()
                         print("menu clicked from gagner.py")
                         return "menu"
+                    
                     if rect_niveaux.collidepoint(event.pos):
+                        self.son_back.play()
                         print("niveaux clicked from gagner.py")
                         print("return level")
                         return "level"
+                    
                     if rect_quitter.collidepoint(event.pos):
+                        self.son_back.play()
                         print("quit clicked from gagner.py")
                         return "quit"
 
@@ -67,15 +85,33 @@ class Gagner :
             couleur_rect_niveaux = (155, 89, 182)    # Violet
             couleur_rect_quitter = (231, 76, 60)     # Rouge
 
+            je_suis_sur_bouton = False
 
             if rect_menu.collidepoint(mouse_pos):
                 couleur_rect_menu = (88, 214, 141)   # Vert clair
-            
+                je_suis_sur_bouton = True
+                if memoire_bouton != "menu": 
+                    self.son_hover.play()
+                    memoire_bouton = "menu"
+
             if rect_niveaux.collidepoint(mouse_pos):
                 couleur_rect_niveaux = (187, 143, 206)  # Violet clair
-            
+                je_suis_sur_bouton = True
+
+                if memoire_bouton != "niveau": 
+                    self.son_hover.play()
+                    memoire_bouton = "niveau"
+
             if rect_quitter.collidepoint(mouse_pos):
                 couleur_rect_quitter = (236, 112, 99)  # Rouge clair
+                je_suis_sur_bouton = True
+
+                if memoire_bouton != "quit": 
+                    self.son_hover.play()
+                    memoire_bouton = "quit"
+
+            if je_suis_sur_bouton == False :
+                memoire_bouton = ""
 
             # ============================================================
             # ANCIENNE MÉTHODE (TA MÉTHODE) - NE FONCTIONNE PAS BIEN

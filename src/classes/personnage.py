@@ -1,5 +1,11 @@
 import pygame
 from data.config import WIDTH, HEIGHT
+
+
+pygame.init()
+pygame.mixer.init()
+
+
 class Personnage:
     def __init__(self, x, y, width, height, color, speed):
         self.x = x
@@ -16,6 +22,9 @@ class Personnage:
         self.is_jumping = False
 
         self.player_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+
+        self.son_jump = pygame.mixer.Sound("src/sounds/jump.wav")
+        self.son_jump.set_volume(0.5)
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -42,10 +51,9 @@ class Personnage:
             self.x += self.speed
 
 
-        self.vitesse_verticale += self.gravite # Appliquer la gravité a chaque fois il augumente la vitesse verticale
+        self.vitesse_verticale += self.gravite 
         self.y += self.vitesse_verticale
         
-        # mettre à jour player_rect avec la nouvelle position !
         self.player_rect.x = self.x
         self.player_rect.y = self.y
         
@@ -58,6 +66,7 @@ class Personnage:
 
     def jump(self):
         if not self.is_jumping:
+            self.son_jump.play()
             self.vitesse_verticale = self.puissance_saut
             self.is_jumping = True
 

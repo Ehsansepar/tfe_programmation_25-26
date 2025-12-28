@@ -1,5 +1,5 @@
 import pygame
-from data.config import *
+import data.config as config
 
 
 pygame.init()
@@ -16,10 +16,10 @@ class Menu :
         police = pygame.font.SysFont('comicsansms', 40, bold=True)
 
 
-        self.rect_jouer = pygame.Rect(WIDTH // 2 - 150, 275, 300, 60)
-        self.rect_niveaux = pygame.Rect(WIDTH // 2 - 150, 365, 300, 60)
-        self.rect_parametres = pygame.Rect(WIDTH // 2 - 150, 455, 300, 60)
-        self.rect_quitter = pygame.Rect(WIDTH // 2 - 150, 545, 300, 60)
+        self.rect_jouer = pygame.Rect(config.WIDTH // 2 - 150, 275, 300, 60)
+        self.rect_niveaux = pygame.Rect(config.WIDTH // 2 - 150, 365, 300, 60)
+        self.rect_parametres = pygame.Rect(config.WIDTH // 2 - 150, 455, 300, 60)
+        self.rect_quitter = pygame.Rect(config.WIDTH // 2 - 150, 545, 300, 60)
 
 
         self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
@@ -57,12 +57,8 @@ class Menu :
                         return "parametre"
                     elif event.key in [pygame.K_4, pygame.K_KP4] or event.unicode in ["'", '4']:
                         return "quit"
-
-                # ============================================================
-                # BONNE MÉTHODE - MOUSEBUTTONDOWN
-                # Détecte le MOMENT EXACT du clic (1 seule fois)
-                # Le clic est un ÉVÉNEMENT, pas un état continu
-                # ============================================================
+                    
+                    
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.rect_jouer.collidepoint(event.pos):
                         self.son_back.play()
@@ -145,12 +141,12 @@ class Menu :
             # pygame.draw.rect(self.ecran, (255, 255, 255), self.rect_quitter, 3, 15)
 
             # Titreee
-            self.afficher_text("Bonjour et Bienvenue !", police, (253, 252, 220), WIDTH // 2, 150)
+            self.afficher_text("Bonjour et Bienvenue !", police, (253, 252, 220), config.WIDTH // 2, 150)
             
 
-            self.afficher_text("1 - Jouer", police, (255, 255, 255), WIDTH // 2, 305)
-            self.afficher_text("2 - Niveaux", police, (255, 255, 255), WIDTH // 2, 395)
-            self.afficher_text("3 - Paramètres", police, (255, 255, 255), WIDTH // 2, 485)
-            self.afficher_text("4 - Quitter", police, (255, 255, 255), WIDTH // 2, 575)
+            self.afficher_text("1 - Jouer", police, (255, 255, 255), config.WIDTH // 2, 305)
+            self.afficher_text("2 - Niveaux", police, (255, 255, 255), config.WIDTH // 2, 395)
+            self.afficher_text("3 - Paramètres", police, (255, 255, 255), config.WIDTH // 2, 485)
+            self.afficher_text("4 - Quitter", police, (255, 255, 255),config.WIDTH // 2, 575)
 
             pygame.display.flip()

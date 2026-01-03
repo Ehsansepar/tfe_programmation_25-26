@@ -1,5 +1,5 @@
 import pygame
-from data.config import WIDTH, HEIGHT, FPS
+from data.config import WIDTH, HEIGHT, FPS, PLAYER_SPEED
 from classes.parametre import Parametre
 from classes.personnage import Personnage
 from classes.menu import *
@@ -30,7 +30,8 @@ clock = pygame.time.Clock()
 
 sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
 
-personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=5)
+# Vitesse automatique selon Windows/Mac
+personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=PLAYER_SPEED)
 
 finished_rect = pygame.Rect(pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100))
 

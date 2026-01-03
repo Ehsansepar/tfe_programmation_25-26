@@ -61,6 +61,8 @@ class Parametre:
                         return "quit"
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                    
                     if self.resulo_panel_ouvert:
                         if opt_1.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 800, 600
@@ -112,41 +114,6 @@ class Parametre:
                         if rect_resolution.collidepoint(event.pos):
                             self.resulo_panel_ouvert = True
 
-                        
-
-                    
-
-
-                    # if rect_resolution.collidepoint(event.pos):
-                    #     if config.WIDTH == 800:
-                    #         config.WIDTH = 1024
-                    #         config.HEIGHT = 768
-
-                    #     elif config.WIDTH == 1024:
-                    #         config.WIDTH = 1280
-                    #         config.HEIGHT = 720
-
-                    #     elif config.WIDTH == 1280:
-                    #         config.WIDTH = 1366
-                    #         config.HEIGHT = 768
-
-                    #     elif config.WIDTH == 1366:
-                    #         config.WIDTH = 1600
-                    #         config.HEIGHT = 900
-                        
-                    #     elif config.WIDTH == 1600:
-                    #         config.WIDTH = 1920
-                    #         config.HEIGHT = 1080
-                        
-                    #     elif config.WIDTH == 1920:
-                    #         config.WIDTH = 2560
-                    #         config.HEIGHT = 1440
-                        
-                    #     else:
-                    #         config.WIDTH = 800
-                    #         config.HEIGHT = 800
-
-                    #     self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
 
 
 

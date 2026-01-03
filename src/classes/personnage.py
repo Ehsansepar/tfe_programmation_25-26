@@ -1,5 +1,5 @@
 import pygame
-from data.config import WIDTH, HEIGHT
+from data.config import WIDTH, HEIGHT, PLAYER_SPEED, PLAYER_GRAVITY, PLAYER_JUMP
 
 
 pygame.init()
@@ -17,8 +17,8 @@ class Personnage:
 
 
         self.vitesse_verticale = 0 
-        self.gravite = 0.5 # en pixels par frame^2
-        self.puissance_saut = -15 # en pixels par frame
+        self.gravite = PLAYER_GRAVITY  # Automatique selon Windows/Mac
+        self.puissance_saut = PLAYER_JUMP  # Automatique selon Windows/Mac
         self.is_jumping = False
 
         self.player_rect = pygame.Rect(self.x, self.y, self.width, self.height)
@@ -73,7 +73,7 @@ class Personnage:
     def mettre_a_pos_initiale(self):
         self.x = 100
         self.y = 300
-        self.speed = 5
+        self.speed = PLAYER_SPEED  # Automatique selon Windows/Mac
         self.vitesse_verticale = 0
         self.is_jumping = False
 

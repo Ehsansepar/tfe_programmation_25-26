@@ -4,8 +4,10 @@ from os import name
 
 import pygame
 
-from data.config import WIDTH, HEIGHT, FPS
+# from data.config import WIDTH, HEIGHT, FPS 
 
+import data.config as config # ca veut dire qu on va toucher les variable vrar
+# alors que si on fait
 pygame.init()
 pygame.mixer.init()
 
@@ -17,21 +19,21 @@ class Level:
         police = pygame.font.SysFont('comicsansms', 40, bold=True)
 
 
-        self.rect_level1 = pygame.Rect(WIDTH // 2 - 270, HEIGHT // 2 - 80, 80, 80)
-        self.rect_level2 = pygame.Rect(WIDTH // 2 - 170, HEIGHT // 2 - 80, 80, 80)
-        self.rect_level3 = pygame.Rect(WIDTH // 2 - 70, HEIGHT // 2 - 80, 80, 80)
-        self.rect_level4 = pygame.Rect(WIDTH // 2 + 30, HEIGHT // 2 - 80, 80, 80)
-        self.rect_level5 = pygame.Rect(WIDTH // 2 + 130, HEIGHT // 2 - 80, 80, 80)
-        
+        self.rect_level1 = pygame.Rect(config.WIDTH // 2 - 270, config.HEIGHT // 2 - 80, 80, 80)
+        self.rect_level2 = pygame.Rect(config.WIDTH // 2 - 170, config.HEIGHT // 2 - 80, 80, 80)
+        self.rect_level3 = pygame.Rect(config.WIDTH // 2 - 70, config.HEIGHT // 2 - 80, 80, 80)
+        self.rect_level4 = pygame.Rect(config.WIDTH // 2 + 30, config.HEIGHT // 2 - 80, 80, 80)
+        self.rect_level5 = pygame.Rect(config.WIDTH // 2 + 130, config.HEIGHT // 2 - 80, 80, 80)
+            
 
-        self.rect_level6 = pygame.Rect(WIDTH // 2 - 270, HEIGHT // 2 + 20, 80, 80)
-        self.rect_level7 = pygame.Rect(WIDTH // 2 - 170, HEIGHT // 2 + 20, 80, 80)
-        self.rect_level8 = pygame.Rect(WIDTH // 2 - 70, HEIGHT // 2 + 20, 80, 80)
-        self.rect_level9 = pygame.Rect(WIDTH // 2 + 30, HEIGHT // 2 + 20, 80, 80)
-        self.rect_level10 = pygame.Rect(WIDTH // 2 + 130, HEIGHT // 2 + 20, 80, 80)
+        self.rect_level6 = pygame.Rect(config.WIDTH // 2 - 270, config.HEIGHT // 2 + 20, 80, 80)
+        self.rect_level7 = pygame.Rect(config.WIDTH // 2 - 170, config.HEIGHT // 2 + 20, 80, 80)
+        self.rect_level8 = pygame.Rect(config.WIDTH // 2 - 70, config.HEIGHT // 2 + 20, 80, 80)
+        self.rect_level9 = pygame.Rect(config.WIDTH // 2 + 30, config.HEIGHT // 2 + 20, 80, 80)
+        self.rect_level10 = pygame.Rect(config.WIDTH // 2 + 130, config.HEIGHT // 2 + 20, 80, 80)
 
-        self.rect_aller_menu = pygame.Rect(WIDTH // 2 - 150, HEIGHT - 100, 300, 60)
-        
+        self.rect_aller_menu = pygame.Rect(config.WIDTH // 2 - 150, config.HEIGHT - 100, 300, 60)
+                
 
         self.couleur1 = (46, 204, 113)    # Vert
         self.couleur2 = (52, 152, 219)    # Bleu
@@ -232,25 +234,25 @@ class Level:
             pygame.draw.rect(self.ecran, c_menu, self.rect_aller_menu, 0, 20)
 
 
-            self.afficher_text("Choisis ton niveau", police, (255, 255, 255), WIDTH // 2, 80)
-            # self.afficher_text("M = Retour au menu", pygame.font.SysFont('Arial', 25), (200, 200, 200), WIDTH // 2, HEIGHT - 50)
+            self.afficher_text("Choisis ton niveau", police, (255, 255, 255), config.WIDTH // 2, 80)
+            # self.afficher_text("M = Retour au menu", pygame.font.SysFont('Arial', 25), (200, 200, 200), config.WIDTH // 2, config.HEIGHT - 50)
 
             
 
             # Textes centrés dans les boutons (ligne 1)
-            self.afficher_text("1", police, (255, 255, 255), WIDTH // 2 - 230, HEIGHT // 2 - 40)
-            self.afficher_text("2", police, (255, 255, 255), WIDTH // 2 - 130, HEIGHT // 2 - 40)
-            self.afficher_text("3", police, (255, 255, 255), WIDTH // 2 - 30, HEIGHT // 2 - 40)
-            self.afficher_text("4", police, (255, 255, 255), WIDTH // 2 + 70, HEIGHT // 2 - 40)
-            self.afficher_text("5", police, (255, 255, 255), WIDTH // 2 + 170, HEIGHT // 2 - 40)
+            self.afficher_text("1", police, (255, 255, 255), config.WIDTH // 2 - 230, config.HEIGHT // 2 - 40)
+            self.afficher_text("2", police, (255, 255, 255), config.WIDTH // 2 - 130, config.HEIGHT // 2 - 40)
+            self.afficher_text("3", police, (255, 255, 255), config.WIDTH // 2 - 30, config.HEIGHT // 2 - 40)
+            self.afficher_text("4", police, (255, 255, 255), config.WIDTH // 2 + 70, config.HEIGHT // 2 - 40)
+            self.afficher_text("5", police, (255, 255, 255), config.WIDTH // 2 + 170, config.HEIGHT // 2 - 40)
             # Textes centrés dans les boutons (ligne 2)
-            self.afficher_text("6", police, (255, 255, 255), WIDTH // 2 - 230, HEIGHT // 2 + 60)
-            self.afficher_text("7", police, (255, 255, 255), WIDTH // 2 - 130, HEIGHT // 2 + 60)
-            self.afficher_text("8", police, (255, 255, 255), WIDTH // 2 - 30, HEIGHT // 2 + 60)
-            self.afficher_text("9", police, (255, 255, 255), WIDTH // 2 + 70, HEIGHT // 2 + 60)
-            self.afficher_text("10", police, (255, 255, 255), WIDTH // 2 + 170, HEIGHT // 2 + 60)
+            self.afficher_text("6", police, (255, 255, 255), config.WIDTH // 2 - 230, config.HEIGHT // 2 + 60)
+            self.afficher_text("7", police, (255, 255, 255), config.WIDTH // 2 - 130, config.HEIGHT // 2 + 60)
+            self.afficher_text("8", police, (255, 255, 255), config.WIDTH // 2 - 30, config.HEIGHT // 2 + 60)
+            self.afficher_text("9", police, (255, 255, 255), config.WIDTH // 2 + 70, config.HEIGHT // 2 + 60)
+            self.afficher_text("10", police, (255, 255, 255), config.WIDTH // 2 + 170, config.HEIGHT // 2 + 60)
 
-            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, HEIGHT - 70)
+            self.afficher_text("Retour au menu", police, (255, 255, 255), config.WIDTH // 2, config.HEIGHT - 70)
 
             pygame.display.flip()
-            clock.tick(FPS)
+            clock.tick(config.FPS)

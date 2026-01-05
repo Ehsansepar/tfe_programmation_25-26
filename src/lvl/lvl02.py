@@ -1,5 +1,6 @@
 import pygame
 from data.config import WIDTH, HEIGHT, FPS
+import data.config as config
 from classes.sol import Sol
 from classes.personnage import Personnage
 
@@ -13,9 +14,9 @@ class Lvl02:
         self.police = pygame.font.SysFont('Arial', 20, bold=True)
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
     
-        self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
+        self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=config.HEIGHT-100)
         
-        self.finished_rect = pygame.Rect(2500, HEIGHT-150, 50, 100)
+        self.finished_rect = pygame.Rect(2500, config.HEIGHT-150, 50, 100)
 
         self.plateformes = [
             pygame.Rect(300, 500, 200, 20),
@@ -27,7 +28,7 @@ class Lvl02:
         
 
         self.rect_menu = pygame.Rect(20, 20, 100, 40)
-        self.rect_niveaux = pygame.Rect(WIDTH - 120, 20, 100, 40)
+        self.rect_niveaux = pygame.Rect(config.WIDTH - 120, 20, 100, 40)
 
 
     
@@ -70,7 +71,7 @@ class Lvl02:
             self.personnage.move()
             self.personnage.verifier_platforme(self.plateformes)
 
-            self.milieu_ecran = WIDTH // 2
+            self.milieu_ecran = config.WIDTH // 2
             self.decalage = 0
             
             if self.personnage.x > self.milieu_ecran :
@@ -88,9 +89,13 @@ class Lvl02:
                 for plat in self.plateformes:
                     plat.x = plat.x - self.decalage
 
+        #.  reso actuel
+            self.sol.rect.y = config.HEIGHT - 100
+            self.finished_rect.y = config.HEIGHT - 150
+
             self.ecran.fill((40, 30, 60)) 
 
-            self.afficher_text("Niveau 2", self.police_titre, (255, 255, 255), WIDTH // 2, 40)
+            self.afficher_text("Niveau 2", self.police_titre, (255, 255, 255), config.WIDTH // 2, 40)
 
 
             pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)

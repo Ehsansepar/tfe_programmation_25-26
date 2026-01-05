@@ -1,5 +1,6 @@
 import pygame
-from data.config import WIDTH, HEIGHT, PLAYER_SPEED, PLAYER_GRAVITY, PLAYER_JUMP
+import data.config as config
+from data.config import PLAYER_SPEED, PLAYER_GRAVITY, PLAYER_JUMP
 
 
 pygame.init()
@@ -17,8 +18,8 @@ class Personnage:
 
 
         self.vitesse_verticale = 0 
-        self.gravite = PLAYER_GRAVITY  # Automatique selon Windows/Mac
-        self.puissance_saut = PLAYER_JUMP  # Automatique selon Windows/Mac
+        self.gravite = PLAYER_GRAVITY  # Automatique par rapport Windows/Mac
+        self.puissance_saut = PLAYER_JUMP  # Automatique par rapport Windows/Mac
         self.is_jumping = False
 
         self.player_rect = pygame.Rect(self.x, self.y, self.width, self.height)
@@ -57,7 +58,7 @@ class Personnage:
         self.player_rect.x = self.x
         self.player_rect.y = self.y
         
-        ground_y = HEIGHT - 100 - self.height  # Le sol est à HEIGHT - 100
+        ground_y = config.HEIGHT - 100 - self.height  # Le sol est à config.HEIGHT - 100 (dynamique)
 
         if self.y >= ground_y:
             self.y = ground_y

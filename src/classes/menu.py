@@ -57,6 +57,8 @@ class Menu :
                         return "parametre"
                     elif event.key in [pygame.K_4, pygame.K_KP4] or event.unicode in ["'", '4']:
                         return "quit"
+                    elif event.key == pygame.K_h:
+                        return "welcome"
                     
                     
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:

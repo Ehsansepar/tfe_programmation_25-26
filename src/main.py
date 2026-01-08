@@ -6,6 +6,7 @@ from classes.menu import *
 from classes.gagner import Gagner
 from classes.level import Level
 from classes.sol import Sol
+from classes.welcome import Welcome
 
 # Import des niveaux
 from lvl.lvl01 import Lvl01
@@ -51,6 +52,10 @@ while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+            if event.type == pygame.KEYDOWN :
+                if event.key == pygame.K_h:
+                    page = "welcome"
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_END] : 
@@ -93,6 +98,11 @@ while running:
 
 # ------------------------------------------------------------------------------
 
+    elif page == "welcome" :
+        page_welcome = Welcome(ecran)
+        result = page_welcome.run_welcome(personnage)
+        if result == "quit" :
+            running = False
 
     elif page == "win" :
         page_gagner = Gagner(ecran)

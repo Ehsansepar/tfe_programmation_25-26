@@ -27,17 +27,19 @@ class Parametre:
         clock = pygame.time.Clock()
 
         memoire_bouton = ""
-
+        is_fullScreen = False
         
         while True:
             mouse_pos = pygame.mouse.get_pos()
 
             rect_resolution = pygame.Rect(config.WIDTH // 2 - 150, 300, 300, 70)
             rect_retour = pygame.Rect(config.WIDTH // 2 - 150, 400, 300, 70)
+            
 
 
             # le truc de popup pour les fenetre de reso
             fenetre_fond = pygame.Rect(config.WIDTH // 2 - 200, 100, 400, 550)
+            
             
             # ca c est les option on va dire
             opt_1 = pygame.Rect(config.WIDTH // 2 - 150, 140, 300, 50)   # 800x600
@@ -47,7 +49,10 @@ class Parametre:
             opt_5 = pygame.Rect(config.WIDTH // 2 - 150, 380, 300, 50)   # 1600x900
             opt_6 = pygame.Rect(config.WIDTH // 2 - 150, 440, 300, 50)   # 1920x1080
             opt_7 = pygame.Rect(config.WIDTH // 2 - 150, 500, 300, 50)   # 2560x1440
-            opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 570, 300, 50) 
+            opt_fullscreen = pygame.Rect(config.WIDTH // 2 - 150, 560, 300, 50) 
+
+            opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 620, 300, 50) 
+
 
 
             for event in pygame.event.get():
@@ -59,6 +64,8 @@ class Parametre:
                         return "menu"
                     if event.key == pygame.K_END:
                         return "quit"
+                
+
 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -102,6 +109,17 @@ class Parametre:
                             config.WIDTH, config.HEIGHT = 2560, 1440
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
+
+                        elif opt_fullscreen.collidepoint(event.pos) :
+                            if is_fullScreen:
+                                # windowed
+                                self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
+                                is_fullScreen = False
+                            else:
+                                # fullscreen
+                                self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT), pygame.FULLSCREEN)
+                                is_fullScreen = True
+                            self.resulo_panel_ouvert = False
                         
                         elif opt_fermer.collidepoint(event.pos):
                             self.resulo_panel_ouvert = False
@@ -120,6 +138,8 @@ class Parametre:
             
             self.ecran.fill((0, 129, 167))
 
+
+        # ------------------------------------ hors de popup ca--------------------------------------------------------------------------
             couleur_retour = (231, 76, 60)
             if rect_retour.collidepoint(mouse_pos):
                 couleur_retour = (236, 112, 99)
@@ -186,12 +206,29 @@ class Parametre:
 
                 pygame.draw.rect(self.ecran, (52, 152, 219), opt_7, 0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_7, 2, 10)
-                self.afficher_text("2560 x 1440", self.police_option, (255,255,255), config.WIDTH//2, 525)
+                self.afficher_text("2560 x 1440", self.police_option, (255,255,255), config.WIDTH//2, 530)
 
+                # pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
+                # pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
+                # self.afficher_text("Full Screen", self.police_option, (255, 255, 255), config.WIDTH//2, 585)
+                
                 # annulé
                 pygame.draw.rect(self.ecran, (231, 76, 60), opt_fermer,0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_fermer, 2, 10)
-                self.afficher_text("Fermer", self.police_option, (255,255,255), config.WIDTH//2, 595)
+                self.afficher_text("Fermer", self.police_option, (255,255,255), config.WIDTH//2, 645)
+
+            if self.resulo_panel_ouvert == True and is_fullScreen == False :
+                pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
+                pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
+                self.afficher_text("Full Screen", self.police_option, (255, 255, 255), config.WIDTH//2, 585)
+            
+            elif self.resulo_panel_ouvert == True and is_fullScreen == True :
+                pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
+                pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
+                self.afficher_text("Windowed", self.police_option, (255, 255, 255), config.WIDTH//2, 585)
+
+                
+
 
             if self.resulo_panel_ouvert == True :
                 self.son_back.set_volume(0)

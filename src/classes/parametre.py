@@ -38,7 +38,7 @@ class Parametre:
 
 
             # le truc de popup pour les fenetre de reso
-            fenetre_fond = pygame.Rect(config.WIDTH // 2 - 200, 100, 400, 550)
+            fenetre_fond = pygame.Rect(config.WIDTH // 2 - 200, 100, 400, 610)
             
             
             # ca c est les option on va dire
@@ -51,7 +51,7 @@ class Parametre:
             opt_7 = pygame.Rect(config.WIDTH // 2 - 150, 500, 300, 50)   # 2560x1440
             opt_fullscreen = pygame.Rect(config.WIDTH // 2 - 150, 560, 300, 50) 
 
-            opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 620, 300, 50) 
+            opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 640, 300, 50) 
 
 
 
@@ -84,31 +84,37 @@ class Parametre:
                             config.WIDTH, config.HEIGHT = 1024, 768
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
+                            is_fullScreen = False
                         
                         elif opt_3.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 1280, 720
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
-                        
+                            is_fullScreen = False
+
                         elif opt_4.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 1366, 768
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
-                        
+                            is_fullScreen = False
+
                         elif opt_5.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 1600, 900
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
-                        
+                            is_fullScreen = False
+
                         elif opt_6.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 1920, 1080
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
-                        
+                            is_fullScreen = False
+
                         elif opt_7.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 2560, 1440
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
+                            is_fullScreen = False
 
                         elif opt_fullscreen.collidepoint(event.pos) :
                             if is_fullScreen:
@@ -206,7 +212,7 @@ class Parametre:
 
                 pygame.draw.rect(self.ecran, (52, 152, 219), opt_7, 0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_7, 2, 10)
-                self.afficher_text("2560 x 1440", self.police_option, (255,255,255), config.WIDTH//2, 530)
+                self.afficher_text("2560 x 1440", self.police_option, (255,255,255), config.WIDTH//2, 525)
 
                 # pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
                 # pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
@@ -215,7 +221,7 @@ class Parametre:
                 # annulé
                 pygame.draw.rect(self.ecran, (231, 76, 60), opt_fermer,0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_fermer, 2, 10)
-                self.afficher_text("Fermer", self.police_option, (255,255,255), config.WIDTH//2, 645)
+                self.afficher_text("Fermer", self.police_option, (255,255,255), config.WIDTH//2, 665)
 
             if self.resulo_panel_ouvert == True and is_fullScreen == False :
                 pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)

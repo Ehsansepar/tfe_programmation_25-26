@@ -114,18 +114,6 @@ class Gagner :
             if je_suis_sur_bouton == False :
                 memoire_bouton = ""
 
-            # ============================================================
-            # ANCIENNE MÉTHODE (TA MÉTHODE) - NE FONCTIONNE PAS BIEN
-            # Problème: get_pressed() détecte si le bouton est MAINTENU enfoncé
-            # Donc le clic reste actif sur plusieurs frames et plusieurs pages
-            # ============================================================
-            # mouse_clicked = pygame.mouse.get_pressed()
-            # if rect_menu.collidepoint(mouse_pos):
-            #     if mouse_clicked[0]:
-            #         mouse_clicked = [0, 0, 0]  # ça ne réinitialise pas vraiment le clic!
-            #         return "menu"
-            # ============================================================
-
             pygame.draw.rect(self.ecran, couleur_rect_menu, rect_menu, 0, 20)
             pygame.draw.rect(self.ecran, couleur_rect_niveaux, rect_niveaux, 0, 20)
             pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter, 0, 20)

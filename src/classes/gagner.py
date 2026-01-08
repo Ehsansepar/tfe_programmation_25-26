@@ -1,5 +1,6 @@
 import pygame
-from data.config import WIDTH, HEIGHT, FPS
+# from data.config import WIDTH, HEIGHT, FPS
+import data.config as config
 from classes.personnage import Personnage
 from classes.sol import Sol
 
@@ -14,7 +15,7 @@ class Gagner :
         global police
         police = pygame.font.SysFont('comicsansms', 40, bold=True)
 
-        self.finished_rect = pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100)
+        self.finished_rect = pygame.Rect(config.WIDTH-100, config.HEIGHT-150, 50, 100)
         
 
         self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
@@ -38,9 +39,9 @@ class Gagner :
 
         memoire_bouton = ""
 
-        rect_menu = pygame.Rect(WIDTH // 2 - 150, 330, 300, 70)
-        rect_niveaux = pygame.Rect(WIDTH // 2 - 150, 430, 300, 70)
-        rect_quitter = pygame.Rect(WIDTH // 2 - 150, 530, 300, 70)
+        rect_menu = pygame.Rect(config.WIDTH // 2 - 150, 330, 300, 70)
+        rect_niveaux = pygame.Rect(config.WIDTH // 2 - 150, 430, 300, 70)
+        rect_quitter = pygame.Rect(config.WIDTH // 2 - 150, 530, 300, 70)
 
         while running:
             
@@ -129,13 +130,13 @@ class Gagner :
             pygame.draw.rect(self.ecran, couleur_rect_niveaux, rect_niveaux, 0, 20)
             pygame.draw.rect(self.ecran, couleur_rect_quitter, rect_quitter, 0, 20)
 
-            self.afficher_text("Félicitations !", police, (255, 215, 0), WIDTH // 2, 150)
-            self.afficher_text("Vous avez gagné !", police, (255, 255, 255), WIDTH // 2, 220)
+            self.afficher_text("Félicitations !", police, (255, 215, 0), config.WIDTH // 2, 150)
+            self.afficher_text("Vous avez gagné !", police, (255, 255, 255), config.WIDTH // 2, 220)
 
             # Texte centré dans les nouveaux boutons
-            self.afficher_text("Retour au menu", police, (255, 255, 255), WIDTH // 2, 365)
-            self.afficher_text("Niveaux", police, (255, 255, 255), WIDTH // 2, 465)
-            self.afficher_text("Quitter", police, (255, 255, 255), WIDTH // 2, 565)
+            self.afficher_text("Retour au menu", police, (255, 255, 255), config.WIDTH // 2, 365)
+            self.afficher_text("Niveaux", police, (255, 255, 255), config.WIDTH // 2, 465)
+            self.afficher_text("Quitter", police, (255, 255, 255), config.WIDTH // 2, 565)
 
             
             

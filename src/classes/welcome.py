@@ -18,6 +18,10 @@ class Welcome() :
         self.rect_connecter = pygame.Rect(config.WIDTH // 2 - 230, config.HEIGHT // 2, 200, 60)
         self.rect_inscrire = pygame.Rect(config.WIDTH // 2 + 30, config.HEIGHT // 2, 200, 60)
 
+        
+
+        
+
     def afficher_text(self, text, font, text_col, x, y) :
         img = font.render(text, True, text_col)
         rect = img.get_rect(center=(x, y))
@@ -33,16 +37,45 @@ class Welcome() :
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 :
                     if self.rect_connecter.collidepoint(event.pos) :
                         print("button connecter pressed")
+                        return "login"
+                    
                     if self.rect_inscrire.collidepoint(event.pos) :
                         print("inscrire button pressed")
+                        return "inscription"
+
+            
+            pos_souris = pygame.mouse.get_pos()
+
+            couleur_btn_connecter = (0, 150, 80)
+            couleur_btn_inscrire = (180, 80, 0)
+
+            couleur_btn_connecter_hover = (0, 180, 100)
+            couleur_btn_inscrire_hover = (210, 100, 20)
+
+            # print(pos_souris)
+            je_suis_sur_un_bouton = False
+            
+            if self.rect_connecter.collidepoint(pos_souris) :
+                je_suis_sur_un_bouton = True
+                if je_suis_sur_un_bouton == True : 
+                    couleur_btn_connecter = couleur_btn_connecter_hover
+                else : 
+                    couleur_btn_connecter = couleur_btn_connecter_hover
                 
+            if self.rect_inscrire.collidepoint(pos_souris) :
+                je_suis_sur_un_bouton = True
+                if je_suis_sur_un_bouton == True :
+                    couleur_btn_inscrire = couleur_btn_inscrire_hover
+                else : 
+                    couleur_btn_inscrire = couleur_btn_inscrire_hover
+            
 
             self.ecran.fill((0, 119, 182))
             
             self.afficher_text("Bienvenue !", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
             
-            pygame.draw.rect(self.ecran, (0, 150, 80), self.rect_connecter, border_radius=10)
-            pygame.draw.rect(self.ecran, (180, 80, 0), self.rect_inscrire, border_radius=10)
+            pygame.draw.rect(self.ecran, couleur_btn_connecter, self.rect_connecter, border_radius=10)
+            pygame.draw.rect(self.ecran, couleur_btn_inscrire, self.rect_inscrire, border_radius=10)
             
 
             self.afficher_text("Se connecter", button_police, (255, 255, 255), self.rect_connecter.centerx, self.rect_connecter.centery)

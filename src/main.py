@@ -7,6 +7,8 @@ from classes.gagner import Gagner
 from classes.level import Level
 from classes.sol import Sol
 from classes.welcome import Welcome
+from classes.login import Login
+from classes.inscription import Inscription
 
 # Import des niveaux
 from lvl.lvl01 import Lvl01
@@ -103,6 +105,24 @@ while running:
         result = page_welcome.run_welcome(personnage)
         if result == "quit" :
             running = False
+
+        elif result == "login" :
+            page = "login"
+        elif result == "inscription" :
+            page = "inscription"
+    
+    elif page == "login" :
+        page_login = Login(ecran)
+        result = page_login.run_login(personnage)
+        if result == "quit" :
+            running = False
+
+    elif page == "inscription" :
+        page_inscription = Inscription(ecran) 
+        result = page_inscription.run_inscription(ecran)
+        if result == "quit" :
+            running = False
+            
 
     elif page == "win" :
         page_gagner = Gagner(ecran)

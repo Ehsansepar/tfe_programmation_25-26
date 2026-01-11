@@ -6,6 +6,7 @@
 
 import pygame 
 import data.config as config
+from classes.session import Session
 
 class Welcome() :
     def __init__(self, ecran):
@@ -71,9 +72,13 @@ class Welcome() :
             
 
             self.ecran.fill((0, 119, 182))
-            
-            self.afficher_text("Bienvenue !", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
-            
+
+            if Session.username != '' :
+                self.afficher_text(f"Bienvenue {Session.username}", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
+            else :
+                self.afficher_text("Bienvenue no username!", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
+                
+
             pygame.draw.rect(self.ecran, couleur_btn_connecter, self.rect_connecter, border_radius=10)
             pygame.draw.rect(self.ecran, couleur_btn_inscrire, self.rect_inscrire, border_radius=10)
             

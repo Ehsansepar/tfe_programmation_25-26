@@ -1,5 +1,5 @@
 import pygame
-
+from classes.session import Session
 
 class Inscription :
     def __init__(self, ecran):
@@ -17,7 +17,7 @@ class Inscription :
         self.rect_active_username = False
         self.rect_active_password = False
     
-
+        self.show_error = False
         self.rect_enter = pygame.Rect(295, 503, 219, 44)
 
     def afficher_text(self, text, font, text_col, x, y) :
@@ -44,9 +44,10 @@ class Inscription :
                         self.rect_active_password = False
 
                     if self.rect_enter.collidepoint(event.pos) :
-                        print(f"""Username : {self.user_username}\nPassword : {self.user_pass}""")
-                        self.user_username = ''
-                        self.user_pass = ''
+                        if self.user_username != '' and self.user_pass != '':
+                            Session.username = self.user_username  # Sauvegarde le username
+                            print(f"""Username : {self.user_username}\nPassword : {self.user_pass}""")
+                            return "welcome" 
 
                 
 
@@ -60,10 +61,13 @@ class Inscription :
                             self.user_pass = self.user_pass[:-1]
 
                     elif event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER :
-                        if self.rect_active_username :
+                        if self.user_username != '' and self.user_pass != '' :
                             print("input user : ", self.user_username)
-                        elif self.rect_active_password : 
-                            print("input user : ", self.user_username)
+                            print("Password : ", self.user_pass)
+
+                        elif self.user_username == '' or self.user_pass == '' : 
+                            print("remplis tout")
+                            self.show_error = True
                             
                     else : 
                         if self.rect_active_username :
@@ -98,5 +102,8 @@ class Inscription :
 
             pygame.draw.rect(ecran, (50, 150, 50), self.rect_enter, 0, 20)
             self.afficher_text("S'inscrire", self.police, (255, 255, 255), 350, 515)
+
+            if self.show_error:
+                self.afficher_text("Remplis tout", self.police, (255, 0, 0), 320, 472)
 
             pygame.display.flip()

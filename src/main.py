@@ -122,6 +122,10 @@ while running:
         result = page_inscription.run_inscription(ecran)
         if result == "quit" :
             running = False
+        elif result == "welcome" :
+            page = "welcome"
+        elif result == "menu" :
+            page = "menu"
             
 
     elif page == "win" :

@@ -16,8 +16,8 @@ class Parametre:
         self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
         self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
 
-        self.taille = pygame.display.get_desktop_sizes()
-        print(self.taille) 
+        self.taille_ecran_actuelle = pygame.display.get_desktop_sizes()
+        # print(self.taille) 
 
         self.resulo_panel_ouvert = False
 
@@ -53,7 +53,7 @@ class Parametre:
             opt_6 = pygame.Rect(config.WIDTH // 2 - 150, 440, 300, 50)   # 1920x1080
             opt_7 = pygame.Rect(config.WIDTH // 2 - 150, 500, 300, 50)   # 2560x1440
             opt_fullscreen = pygame.Rect(config.WIDTH // 2 - 150, 560, 300, 50) 
-            opt_your_reso = pygame.Rect(config.WIDTH // 2 - 150, 620, 300, 50)
+            opt_your_reso = pygame.Rect(config.WIDTH // 2 - 150, 620, 300, 50) # t as vu on prends direct la reso de ton ecran
 
             opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 690, 300, 50) 
 
@@ -192,7 +192,7 @@ class Parametre:
             self.afficher_text("Paramètres", self.police_titre, (253, 252, 220), config.WIDTH // 2, 80)
             
 
-            self.afficher_text(f"Taille actuelle : {config.WIDTH}x{config.HEIGHT}", self.police_option, (200, 200, 200), config.WIDTH // 2, 200)
+            self.afficher_text(f"Taille actuelle : {self.taille_ecran_actuelle[0]}x{self.taille_ecran_actuelle[1]}", self.police_option, (200, 200, 200), config.WIDTH // 2, 200)
 
             self.afficher_text("Changer Résolution", self.police_option, (255, 255, 255), config.WIDTH // 2, 335)
             self.afficher_text("Retour au menu", self.police_option, (255, 255, 255), config.WIDTH // 2, 435)

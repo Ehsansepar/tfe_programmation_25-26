@@ -60,7 +60,7 @@ class Parametre:
             opt_your_reso = pygame.Rect(config.WIDTH // 2 - 150, 620, 300, 50)
             opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 690, 300, 50) 
 
-            # Popup Clavier (Plus large pour une meilleure disposition)
+            # Popup Clavier
             fenetre_clavier = pygame.Rect(config.WIDTH // 2 - 275, 135, 550, 600)
             rect_haut = pygame.Rect(config.WIDTH // 2 + 30, 205, 120, 50)
             rect_bas = pygame.Rect(config.WIDTH // 2 + 30, 280, 120, 50)
@@ -93,7 +93,7 @@ class Parametre:
                     
                     if self.resulo_panel_ouvert:
                         if opt_1.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 800, 600
+                            config.WIDTH, config.HEIGHT = 800, 800
                             os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre https://stackoverflow.com/questions/38703791/how-do-i-place-the-pygame-screen-in-the-middle
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
@@ -237,7 +237,6 @@ class Parametre:
 
             # Textes
             self.afficher_text("Paramètres", self.police_titre, (253, 252, 220), config.WIDTH // 2, 80)
-            # self.afficher_text(f"Taille actuelle : {self.taille_ecran_actuelle[0][0]}x{self.taille_ecran_actuelle[0][1]}", self.police_option, (200, 200, 200), config.WIDTH // 2, 200)
             self.afficher_text(f"Taille actuelle : {config.WIDTH}x{config.HEIGHT}", self.police_option, (200, 200, 200), config.WIDTH // 2, 200)
             self.afficher_text("Changer Résolution", self.police_option, (255, 255, 255), config.WIDTH // 2, 335)
             self.afficher_text("Retour au menu", self.police_option, (255, 255, 255), config.WIDTH // 2, 435)
@@ -253,7 +252,7 @@ class Parametre:
                 # options
                 pygame.draw.rect(self.ecran, (52, 152, 219), opt_1, 0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_1, 2, 10)
-                self.afficher_text("800 x 600", self.police_option, (255,255,255), config.WIDTH//2, 165)
+                self.afficher_text("800 x 800", self.police_option, (255,255,255), config.WIDTH//2, 165)
 
                 pygame.draw.rect(self.ecran, (52, 152, 219), opt_2, 0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_2, 2, 10)
@@ -297,11 +296,13 @@ class Parametre:
                 pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
                 self.afficher_text("Windowed", self.police_option, (255, 255, 255), config.WIDTH//2, 585)
-
+                
+                
+            # ---------------- ca c est pour pop up de clavier ----------------
             if self.clavier_panel_ouvert:
                 # Fond du popup
                 pygame.draw.rect(self.ecran, (44, 62, 80), fenetre_clavier, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), fenetre_clavier, 2, 10) # Bordure blanche  
+                pygame.draw.rect(self.ecran, (255, 255, 255), fenetre_clavier, 2, 10) # c est border  
 
                 self.afficher_text("Configuration des Touches", self.police_option, (255, 255, 255), config.WIDTH // 2, 170)
 

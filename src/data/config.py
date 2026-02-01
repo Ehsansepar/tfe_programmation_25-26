@@ -1,3 +1,4 @@
+import pygame
 # =============================================================================
 # CONFIGURATION DU JEU
 # =============================================================================
@@ -46,3 +47,21 @@ else:
     PLAYER_GRAVITY = 0.5   # Gravité normale
     PLAYER_JUMP = -15      # Saut normal
     print("Mode Windows activé !")
+
+
+# =============================================================================
+# CONFIGURATION DES TOUCHES
+# =============================================================================
+# Les touches sont stockées dans un dictionnaire pour un accès facile
+# Vous pouvez modifier les valeurs ici pour changer les raccourcis
+# Les valeurs sont les codes Pygame (voir documentation Pygame pour la liste)
+# Exemple : pygame.K_UP correspond à la flèche vers le haut
+
+# les touches sont stockées dans les différents variables 
+haut = "z"
+bas = "s"
+gauche = "q"
+droite = "d"
+saut = "space"
+pause = "p"
+quitter = "escape"

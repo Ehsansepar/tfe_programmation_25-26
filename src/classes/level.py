@@ -50,12 +50,7 @@ class Level:
         self.couleur_aller_menu = (241, 196, 15)   # Jaune
 
 
-        self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
-        self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
-        
 
-        self.son_hover.set_volume(0.5) # 50% le sons 
-        self.son_back.set_volume(0.5)
 
         return
 
@@ -82,47 +77,36 @@ class Level:
                 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.rect_level1.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level1"
                     
                     if self.rect_level2.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level2"
                     
                     if self.rect_level3.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level3"
                     
                     if self.rect_level4.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level4"
                     
                     if self.rect_level5.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level5"
                     
                     if self.rect_level6.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level6"
                     
                     if self.rect_level7.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level7"
                     
                     if self.rect_level8.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level8"
                     
                     if self.rect_level9.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level9"
                     
                     if self.rect_level10.collidepoint(event.pos):
-                        self.son_hover.play()
                         return "level10"
                     
                     if self.rect_aller_menu.collidepoint(event.pos):
-                        self.son_back.play()
                         return "menu"
                     
             self.ecran.fill((25, 25, 40))  # Fond sombre
@@ -142,79 +126,46 @@ class Level:
             if self.rect_level1.collidepoint(mouse_pos):
                 c1 = (88, 214, 141)  # Vert clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl1" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl1"
 
             if self.rect_level2.collidepoint(mouse_pos):
                 c2 = (93, 173, 226)  # Bleu clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl2" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl2"
 
             if self.rect_level3.collidepoint(mouse_pos):
                 c3 = (187, 143, 206)  # Violet clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl3" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl3"
 
             if self.rect_level4.collidepoint(mouse_pos):
                 c4 = (247, 220, 111)  # Jaune clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl4" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl4"
 
             if self.rect_level5.collidepoint(mouse_pos):
                 c5 = (245, 176, 65)  # Orange clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl5" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl5"
 
             if self.rect_level6.collidepoint(mouse_pos):
                 c6 = (236, 112, 99)  # Rouge clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl6" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl6"
 
             if self.rect_level7.collidepoint(mouse_pos):
                 c7 = (72, 201, 176)  # Turquoise clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl7" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl7"
 
             if self.rect_level8.collidepoint(mouse_pos):
                 c8 = (189, 195, 199)  # Gris clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl8" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl8"
 
             if self.rect_level9.collidepoint(mouse_pos):
                 c9 = (175, 122, 197)  # Violet clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl9" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl9"
 
             if self.rect_level10.collidepoint(mouse_pos):
                 c10 = (217, 136, 128)  # Rouge clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "lvl10" :
-                    self.son_hover.play()
-                    memoire_bouton = "lvl10"
 
             if self.rect_aller_menu.collidepoint(mouse_pos):
                 c_menu = (243, 156, 18)  # Jaune clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "retour" :
-                    self.son_hover.play()
-                    memoire_bouton = "retour"
             
             if je_suis_sur_un_bouton == False :
                 memoire_bouton = ""

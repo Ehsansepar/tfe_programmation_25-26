@@ -18,11 +18,7 @@ class Gagner :
         self.finished_rect = pygame.Rect(config.WIDTH-100, config.HEIGHT-150, 50, 100)
         
 
-        self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
-        self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
 
-        self.son_back.set_volume(0.5)
-        self.son_hover.set_volume(0.5)
 
         return
     
@@ -63,18 +59,15 @@ class Gagner :
                 # ============================================================
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if rect_menu.collidepoint(event.pos):
-                        self.son_back.play()
                         print("menu clicked from gagner.py")
                         return "menu"
                     
                     if rect_niveaux.collidepoint(event.pos):
-                        self.son_back.play()
                         print("niveaux clicked from gagner.py")
                         print("return level")
                         return "level"
                     
                     if rect_quitter.collidepoint(event.pos):
-                        self.son_back.play()
                         print("quit clicked from gagner.py")
                         return "quit"
 
@@ -91,25 +84,19 @@ class Gagner :
             if rect_menu.collidepoint(mouse_pos):
                 couleur_rect_menu = (88, 214, 141)   # Vert clair
                 je_suis_sur_bouton = True
-                if memoire_bouton != "menu": 
-                    self.son_hover.play()
-                    memoire_bouton = "menu"
+
 
             if rect_niveaux.collidepoint(mouse_pos):
                 couleur_rect_niveaux = (187, 143, 206)  # Violet clair
                 je_suis_sur_bouton = True
 
-                if memoire_bouton != "niveau": 
-                    self.son_hover.play()
-                    memoire_bouton = "niveau"
+
 
             if rect_quitter.collidepoint(mouse_pos):
                 couleur_rect_quitter = (236, 112, 99)  # Rouge clair
                 je_suis_sur_bouton = True
 
-                if memoire_bouton != "quit": 
-                    self.son_hover.play()
-                    memoire_bouton = "quit"
+
 
             if je_suis_sur_bouton == False :
                 memoire_bouton = ""

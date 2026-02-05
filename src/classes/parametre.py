@@ -3,7 +3,6 @@ import pygame
 import data.config as config
 import os
 
-
 pygame.init()
 pygame.mixer.init()
 
@@ -15,8 +14,7 @@ class Parametre:
         self.police_option = pygame.font.SysFont('Arial', 30)
         self.police_petite = pygame.font.SysFont('Arial', 22)
 
-        self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
-        self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
+
 
         self.taille_ecran_actuelle = pygame.display.get_desktop_sizes()
 
@@ -98,9 +96,7 @@ class Parametre:
                             self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
                             self.resulo_panel_ouvert = False
 
-                            if memoire_bouton != "opt_1" : 
-                                self.son_hover.play()
-                                memoire_bouton = "opt_1"
+
 
                         elif opt_2.collidepoint(event.pos):
                             config.WIDTH, config.HEIGHT = 1024, 768
@@ -215,17 +211,13 @@ class Parametre:
             if rect_retour.collidepoint(mouse_pos):
                 couleur_retour = (236, 112, 99)
 
-                if memoire_bouton != "retour" : 
-                    self.son_hover.play()
-                    memoire_bouton = "retour"
+
             
             couleur_resolution = (52, 152, 219)
             if rect_resolution.collidepoint(mouse_pos):
                 couleur_resolution = (93, 173, 226)
 
-                if memoire_bouton != "resolution" : 
-                    self.son_hover.play()
-                    memoire_bouton = "resolution"
+
 
             if not (rect_retour.collidepoint(mouse_pos) or rect_resolution.collidepoint(mouse_pos) or rect_clavier.collidepoint(mouse_pos)):
                 memoire_bouton = ""
@@ -394,12 +386,7 @@ class Parametre:
 
                 
 
-            if self.resulo_panel_ouvert == True or self.clavier_panel_ouvert == True :
-                self.son_back.set_volume(0)
-                self.son_hover.set_volume(0)
-            else : 
-                self.son_back.set_volume(0.5)
-                self.son_hover.set_volume(0.5)
+
 
             pygame.display.flip()
             clock.tick(config.FPS)

@@ -49,13 +49,6 @@ else:
     print("Mode Windows activé !")
 
 
-# =============================================================================
-# CONFIGURATION DES TOUCHES
-# =============================================================================
-# Les touches sont stockées dans un dictionnaire pour un accès facile
-# Vous pouvez modifier les valeurs ici pour changer les raccourcis
-# Les valeurs sont les codes Pygame (voir documentation Pygame pour la liste)
-# Exemple : pygame.K_UP correspond à la flèche vers le haut
 
 # les touches sont stockées dans les différents variables 
 haut = "z"

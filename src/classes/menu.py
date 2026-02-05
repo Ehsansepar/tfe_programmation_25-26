@@ -22,12 +22,7 @@ class Menu :
         self.rect_quitter = pygame.Rect(config.WIDTH // 2 - 150, 545, 300, 60)
 
 
-        self.son_hover = pygame.mixer.Sound("src/sounds/gta-menu.wav")
-        self.son_back = pygame.mixer.Sound("src/sounds/gta-menuOut.wav")
-        
 
-        self.son_hover.set_volume(0.5) # 50% le sons 
-        self.son_back.set_volume(0.5)
         return
     
     def afficher_text(self, text, font, text_col, x, y) :
@@ -63,19 +58,15 @@ class Menu :
                     
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.rect_jouer.collidepoint(event.pos):
-                        self.son_back.play()
                         return "game"
                     
                     if self.rect_niveaux.collidepoint(event.pos):
-                        self.son_back.play()
                         return "level"
                     
                     if self.rect_parametres.collidepoint(event.pos):
-                        self.son_back.play()
                         return "parametre"
                     
                     if self.rect_quitter.collidepoint(event.pos):
-                        self.son_back.play()
                         return "quit"
 
             
@@ -97,35 +88,27 @@ class Menu :
             if self.rect_jouer.collidepoint(mouse_pos):
                 couleur_jouer = (88, 214, 141)   # Vert clair
                 je_suis_sur_un_bouton = True
-                if memoire_bouton != "jouer" :
-                    self.son_hover.play()   
-                    memoire_bouton = "jouer"
+
 
             if self.rect_niveaux.collidepoint(mouse_pos):
                 couleur_niveaux = (187, 143, 206) # Violet clair
                 je_suis_sur_un_bouton = True
 
-                if memoire_bouton != "niveau" :
-                    self.son_hover.play()
-                    memoire_bouton = "niveau"
+
 
                     
             if self.rect_parametres.collidepoint(mouse_pos):
                 couleur_param = (93, 173, 226)   # Bleu clair
                 je_suis_sur_un_bouton = True
 
-                if memoire_bouton != "parametre" :
-                    self.son_hover.play()
-                    memoire_bouton = "parametre"
+
 
                     
             if self.rect_quitter.collidepoint(mouse_pos):
                 couleur_quitter = (236, 112, 99) # Rouge clair
                 je_suis_sur_un_bouton = True
 
-                if memoire_bouton != "quit" :
-                    self.son_hover.play()
-                    memoire_bouton = "quit"
+
 
 
             if je_suis_sur_un_bouton == False : 

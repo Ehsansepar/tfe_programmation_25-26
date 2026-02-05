@@ -51,13 +51,13 @@ class Personnage:
         
         
         # enfaite ici on prends les touches et puis on le transforme en chiffre comme ca pygame comprends ce qu on a fait
-        touche_gauche = pygame.key.key_code(config.gauche)   # "q" → pygame.K_q
-        touche_droite = pygame.key.key_code(config.droite)   # "d" → pygame.K_d
-        touche_haut = pygame.key.key_code(config.haut)       # "z" → pygame.K_z
-        touche_bas = pygame.key.key_code(config.bas)         # "s" → pygame.K_s
-        touche_saut = pygame.key.key_code(config.saut)       # "space" → pygame.K_SPACE
+        touche_gauche = pygame.key.key_code(config.gauche)  # en gros la ce que user envoie on le change direct en chiffre qui pygame les comprend direct 
+        touche_droite = pygame.key.key_code(config.droite)
+        touche_haut = pygame.key.key_code(config.haut)
+        touche_bas = pygame.key.key_code(config.bas)
+        touche_saut = pygame.key.key_code(config.saut)
         
-        if keys[touche_gauche]:
+        if keys[touche_gauche]: 
             self.x -= self.speed
         
         if keys[touche_droite]:

@@ -29,26 +29,60 @@ class Personnage:
 
     def move(self):
         keys = pygame.key.get_pressed()
+        
+        # if keys[pygame.K_LEFT]:
+        #     self.x -= self.speed
+        # if keys[pygame.K_RIGHT]:
+        #     self.x += self.speed
+        # if keys[pygame.K_UP]:
+        #     self.jump()
+        # if keys[pygame.K_DOWN]:
+        #     self.y += self.speed
+        # if keys[pygame.K_SPACE]:
+        #     self.jump()
+        # if keys[pygame.K_LSHIFT]:
+        #     self.x += self.speed  
+        # if keys[pygame.K_z]:
+        #     self.jump()
+        # if keys[pygame.K_q]:
+        #     self.x -= self.speed
+        # if keys[pygame.K_d]:
+        #     self.x += self.speed
+        
+        
+        # enfaite ici on prends les touches et puis on le transforme en chiffre comme ca pygame comprends ce qu on a fait
+        touche_gauche = pygame.key.key_code(config.gauche)   # "q" → pygame.K_q
+        touche_droite = pygame.key.key_code(config.droite)   # "d" → pygame.K_d
+        touche_haut = pygame.key.key_code(config.haut)       # "z" → pygame.K_z
+        touche_bas = pygame.key.key_code(config.bas)         # "s" → pygame.K_s
+        touche_saut = pygame.key.key_code(config.saut)       # "space" → pygame.K_SPACE
+        
+        if keys[touche_gauche]:
+            self.x -= self.speed
+        
+        if keys[touche_droite]:
+            self.x += self.speed
+        
+        if keys[touche_haut]:
+            self.jump()
+        
+        if keys[touche_bas]:
+            self.y += self.speed
+        
+        if keys[touche_saut]:
+            self.jump()
+        
+
         if keys[pygame.K_LEFT]:
             self.x -= self.speed
         if keys[pygame.K_RIGHT]:
             self.x += self.speed
         if keys[pygame.K_UP]:
-            # self.y -= self.speed
             self.jump()
         if keys[pygame.K_DOWN]:
             self.y += self.speed
-        if keys[pygame.K_SPACE]:
-            self.jump()
-
+        
         if keys[pygame.K_LSHIFT]:
-            self.x += self.speed  
-
-        if keys[pygame.K_z]:
-            self.jump()
-        if keys[pygame.K_q]:
-            self.x -= self.speed
-        if keys[pygame.K_d]:
             self.x += self.speed
 
 

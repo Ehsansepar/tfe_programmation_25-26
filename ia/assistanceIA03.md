@@ -15,7 +15,7 @@ C'est utile pour :
 
 **AI :** Oui, c'est indispensable pour éviter les conflits (qu'une même touche fasse deux actions). La meilleure méthode est de vérifier si la touche choisie est déjà présente dans tes paramètres avant de l'attribuer.
 
-Si la `nouvelle_touche` est déjà dans les valeurs utilisées, tu refuses le changement ou tu affiches une erreur.
+Si la `nouvelle_touche` est déjà dans les valeurs utiliséses, tu refuses le changement ou tu affiches une erreur.
 
 ---
 

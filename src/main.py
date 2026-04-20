@@ -58,6 +58,8 @@ while running:
             if event.type == pygame.KEYDOWN :
                 if event.key == pygame.K_h:
                     page = "welcome"
+            
+                
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_END] : 
@@ -105,6 +107,8 @@ while running:
         result = page_welcome.run_welcome(personnage)
         if result == "quit" :
             running = False
+        elif result == "back" :
+            page = "menu"
 
         elif result == "login" :
             page = "login"

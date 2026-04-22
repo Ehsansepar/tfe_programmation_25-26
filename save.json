@@ -1,0 +1,12 @@
+{
+    "users": {
+        "ehs": {
+            "password": "123",
+            "niveau_debloque": 1
+        },
+        "test": {
+            "password": "123",
+            "niveau_debloque": 10
+        }
+    }
+}

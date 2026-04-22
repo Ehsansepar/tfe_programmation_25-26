@@ -2,6 +2,8 @@ import pygame
 from data.config import WIDTH, HEIGHT, FPS
 from classes.sol import Sol
 from classes.personnage import Personnage
+import data.config as config
+
 class Lvl01:
     def __init__(self, ecran, personnage):
         self.ecran = ecran
@@ -10,30 +12,30 @@ class Lvl01:
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
 
         self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
-        
 
         self.finished_rect = pygame.Rect(3000-100, HEIGHT-150, 50, 100)
         
         self.decalage = 0
 
-        
         self.plateformes = [
             pygame.Rect(300, 500, 200, 20),
             pygame.Rect(700, 450, 200, 20),
             pygame.Rect(1100, 400, 200, 20),
             pygame.Rect(1500, 350, 200, 20),
             pygame.Rect(1900, 300, 200, 20),
-            ]
-    
+        ]
+
     def afficher_text(self, text, font, text_col, x, y):
         img = font.render(text, True, text_col)
         rect = img.get_rect(center=(x, y))
         self.ecran.blit(img, rect)
-    
+
     def run(self):
         clock = pygame.time.Clock()
         
         while True:
+            dt = clock.tick(FPS) / 1000.0  # delta time en secondes
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return "quit"
@@ -42,62 +44,42 @@ class Lvl01:
                         return "menu"
                     if event.key == pygame.K_l:
                         return "level"
-                
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    if self.rect_menu.collidepoint(event.pos):
-                        return "menu"
-                    if self.rect_niveaux.collidepoint(event.pos):
-                        return "level"
-            
 
-            self.personnage.move()
+            self.personnage.move(dt)
 
             self.personnage.verifier_platforme(self.plateformes)
 
-
-            
+            # Système de caméra (scrolling)
             self.milieu_ecran = WIDTH // 2
             self.decalage = 0
 
             if self.personnage.x > self.milieu_ecran:
                 self.decalage = self.personnage.x - self.milieu_ecran
                 self.personnage.x = self.milieu_ecran
-
-            elif self.personnage < self.milieu_ecran and self.sol.rect.x < 0:
-                self.decalage = self.personnage - self.milieu_ecran
-                self.personnage.x = self.milieu_ecran
-
-                self.finished_rect.x = self.finished_rect.x - self.decalage
-
+                # Déplacer tout le décor vers la gauche
+                self.sol.rect.x -= self.decalage
+                for plat in self.plateformes:
+                    plat.x -= self.decalage
+                self.finished_rect.x -= self.decalage
 
             self.ecran.fill((30, 30, 50))
             
-            # Titre
             self.afficher_text("Niveau 1", self.police_titre, (255, 255, 255), WIDTH // 2, 40)
 
-
-            # Sol
             pygame.draw.rect(self.ecran, self.sol.color, self.sol.rect)
             
-            # Plateformes
             for plateforme in self.plateformes:
-                pygame.draw.rect(self.ecran, (100, 100, 100), 
-                               (plateforme.x, plateforme.y, 
-                                plateforme.width, plateforme.height))
-
+                pygame.draw.rect(self.ecran, (100, 100, 100), plateforme)
 
             pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
             
-            # Personnage
             pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x, self.personnage.y, 
+                           (int(self.personnage.x), int(self.personnage.y), 
                             self.personnage.width, self.personnage.height))
             
-            personnage_rect = pygame.Rect(self.personnage.x, self.personnage.y, 
+            personnage_rect = pygame.Rect(int(self.personnage.x), int(self.personnage.y), 
                                          self.personnage.width, self.personnage.height)
             if personnage_rect.colliderect(self.finished_rect):
                 return "win"
             
-            
             pygame.display.flip()
-            clock.tick(FPS)

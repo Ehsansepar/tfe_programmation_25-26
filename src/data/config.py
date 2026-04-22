@@ -1,60 +1,41 @@
 import pygame
+import sys
 # =============================================================================
-# CONFIGURATION DU JEU
+# CONFIGURATION DU JEU - Résolution avec Delta Time
 # =============================================================================
-# 
-# POURQUOI CE CHOIX WINDOWS / MAC ?
-# ---------------------------------
-# Le jeu a été développé sur Windows où il tournait à ~120-150 FPS.
-# Sur Mac (MacBook), le FPS est limité à 60 Hz.
 #
-# Le problème : le mouvement du personnage dépend du nombre de frames.
-#   - Sur Windows à 120 FPS : le personnage bouge de 5 pixels × 120 = 600 px/sec
-#   - Sur Mac à 60 FPS : le personnage bouge de 5 pixels × 60 = 300 px/sec
-#   → Le jeu est 2x plus lent sur Mac !
+# AVANT : Le mouvement dépendait du FPS → Windows et Mac avaient une vitesse
+#         différente. Solution : demander à l'user son OS au démarrage.
 #
-# La solution : on demande à l'utilisateur son système et on ajuste les
-# valeurs de vitesse, gravité et saut pour que le gameplay soit identique.
-#
+# MAINTENANT : On utilise le DELTA TIME (dt).
+#   dt = temps en secondes écoulé entre chaque frame.
+#   → Sur Mac à 60 FPS : dt ≈ 0.016 s
+#   → Sur Windows à 120 FPS : dt ≈ 0.008 s
+#   
+#   En multipliant la vitesse par dt :
+#   - Mac    : 450 px/s × 0.016 s = 7.2 px/frame
+#   - Windows: 450 px/s × 0.008 s = 3.6 px/frame
+#   → Sur les deux, le personnage parcourt bien 450 px en 1 seconde !
+#   
+#   RÉSULTAT : Windows, Mac, Linux → Jeu identique, aucune question posée !
 # =============================================================================
 
-WIDTH = 800
+WIDTH  = 800
 HEIGHT = 800
 
-# Demande du système à l'utilisateur
-print("=" * 40)
-print("Sur quel système tu joues ?")
-print("1 - Windows")
-print("2 - Mac")
-print("=" * 40)
-choix = input("Ton choix (1 ou 2) : ")
+# FPS cible. On peut mettre 0 pour déverrouiller, le dt s'adaptera.
+FPS = 120
 
-if choix == "2":
-    # ----- MODE MAC -----
-    # Mac est limité à 60 FPS (écran Retina)
-    # On augmente les vitesses pour compenser le FPS plus bas
-    FPS = 60
-    PLAYER_SPEED = 15      # Plus rapide car moins de frames
-    PLAYER_GRAVITY = 1.5   # Chute plus rapide
-    PLAYER_JUMP = -22      # Saut plus puissant
-    print("Mode Mac activé !")
-else:
-    # ----- MODE WINDOWS -----
-    # Windows peut aller jusqu'à 120+ FPS
-    # Valeurs originales du jeu
-    FPS = 120
-    PLAYER_SPEED = 5       # Vitesse normale
-    PLAYER_GRAVITY = 0.5   # Gravité normale
-    PLAYER_JUMP = -15      # Saut normal
-    print("Mode Windows activé !")
+# Vitesses en PIXELS PAR SECONDE (plus de frames par seconde !)
+PLAYER_SPEED   = 450    # 450 pixels par seconde
+PLAYER_GRAVITY  = 1800  # 1800 pixels/s² (gravité)
+PLAYER_JUMP    = -700   # -700 px/s (vitesse initiale du saut)
 
-
-
-# les touches sont stockées dans les différents variables 
-haut = "z"
-bas = "s"
-gauche = "q"
-droite = "d"
-saut = "space"
-pause = "p"
+# les touches sont stockées dans les différents variables
+haut    = "z"
+bas     = "s"
+gauche  = "q"
+droite  = "d"
+saut    = "space"
+pause   = "p"
 quitter = "escape"

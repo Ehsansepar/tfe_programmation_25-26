@@ -16,10 +16,6 @@ class Parametre:
 
 
 
-        self.taille_ecran_actuelle = pygame.display.get_desktop_sizes()
-
-        self.resulo_panel_ouvert = False
-
         self.rect_up_active = False
         self.rect_down_active = False
         self.rect_left_active = False
@@ -36,27 +32,12 @@ class Parametre:
         clock = pygame.time.Clock()
 
         memoire_bouton = ""
-        is_fullScreen = False
         
         while True:
             mouse_pos = pygame.mouse.get_pos()
 
-            rect_resolution = pygame.Rect(config.WIDTH // 2 - 150, 300, 300, 70)
+            rect_clavier = pygame.Rect(config.WIDTH // 2 - 150, 300, 300, 70)
             rect_retour = pygame.Rect(config.WIDTH // 2 - 150, 400, 300, 70)
-            rect_clavier = pygame.Rect(config.WIDTH // 2 - 150, 500, 300, 70)
-            
-            # Popup Resolution
-            fenetre_fond = pygame.Rect(config.WIDTH // 2 - 200, 100, 400, 660) 
-            opt_1 = pygame.Rect(config.WIDTH // 2 - 150, 140, 300, 50)
-            opt_2 = pygame.Rect(config.WIDTH // 2 - 150, 200, 300, 50)
-            opt_3 = pygame.Rect(config.WIDTH // 2 - 150, 260, 300, 50)
-            opt_4 = pygame.Rect(config.WIDTH // 2 - 150, 320, 300, 50)
-            opt_5 = pygame.Rect(config.WIDTH // 2 - 150, 380, 300, 50)
-            opt_6 = pygame.Rect(config.WIDTH // 2 - 150, 440, 300, 50)
-            opt_7 = pygame.Rect(config.WIDTH // 2 - 150, 500, 300, 50)
-            opt_fullscreen = pygame.Rect(config.WIDTH // 2 - 150, 560, 300, 50) 
-            opt_your_reso = pygame.Rect(config.WIDTH // 2 - 150, 620, 300, 50)
-            opt_fermer = pygame.Rect(config.WIDTH // 2 - 150, 690, 300, 50) 
 
             # Popup Clavier
             fenetre_clavier = pygame.Rect(config.WIDTH // 2 - 275, 135, 550, 600)
@@ -88,90 +69,13 @@ class Parametre:
                 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                    
-                    if self.resulo_panel_ouvert:
-                        if opt_1.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 800, 800
-                            os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre https://stackoverflow.com/questions/38703791/how-do-i-place-the-pygame-screen-in-the-middle
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-
-
-
-                        elif opt_2.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 1024, 768
-                            os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-                        
-                        elif opt_3.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 1280, 720
-                            os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-
-                        elif opt_4.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 1366, 768
-                            os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre    
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-
-                        elif opt_5.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 1600, 900
-                            os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-
-                        elif opt_6.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 1920, 1080
-                            os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-
-                        elif opt_7.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = 2560, 1440
-                            os.environ['SDL_VIDEO_CENTERED'] = '1'# pour centrer la fenetre
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-                        
-                        elif opt_your_reso.collidepoint(event.pos):
-                            config.WIDTH, config.HEIGHT = self.taille[0]
-                            os.environ['SDL_VIDEO_CENTERED'] = '1'# pour centrer la fenetre
-                            self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                            self.resulo_panel_ouvert = False
-                            is_fullScreen = False
-
-                        elif opt_fullscreen.collidepoint(event.pos) :
-                            if is_fullScreen:
-                                # windowed
-                                os.environ['SDL_VIDEO_CENTERED'] = '1' # pour centrer la fenetre
-                                self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT))
-                                is_fullScreen = False
-                            else:
-                                # fullscreen
-                                self.ecran = pygame.display.set_mode((config.WIDTH, config.HEIGHT), pygame.FULLSCREEN)
-                                is_fullScreen = True
-                            self.resulo_panel_ouvert = False
-                        
-                        elif opt_fermer.collidepoint(event.pos):
-                            self.resulo_panel_ouvert = False
-
-                    elif self.clavier_panel_ouvert:
+                    if self.clavier_panel_ouvert:
                         if opt_fermer_clavier.collidepoint(event.pos):
                             self.clavier_panel_ouvert = False
 
                     else:
                         if rect_retour.collidepoint(event.pos):
                             return "menu"
-
-                        if rect_resolution.collidepoint(event.pos):
-                            self.resulo_panel_ouvert = True
                         
                         if rect_clavier.collidepoint(event.pos):
                             self.clavier_panel_ouvert = True
@@ -212,84 +116,19 @@ class Parametre:
                 couleur_retour = (236, 112, 99)
 
 
-            
-            couleur_resolution = (52, 152, 219)
-            if rect_resolution.collidepoint(mouse_pos):
-                couleur_resolution = (93, 173, 226)
-
-
-
-            if not (rect_retour.collidepoint(mouse_pos) or rect_resolution.collidepoint(mouse_pos) or rect_clavier.collidepoint(mouse_pos)):
+            if not (rect_retour.collidepoint(mouse_pos) or rect_clavier.collidepoint(mouse_pos)):
                 memoire_bouton = ""
 
-
             pygame.draw.rect(self.ecran, couleur_retour, rect_retour, 0, 20)
-            pygame.draw.rect(self.ecran, couleur_resolution, rect_resolution, 0, 50)
             pygame.draw.rect(self.ecran, (0,100,0), rect_clavier, 0, 50)
 
             # Textes
             self.afficher_text("Paramètres", self.police_titre, (253, 252, 220), config.WIDTH // 2, 80)
-            self.afficher_text(f"Taille actuelle : {config.WIDTH}x{config.HEIGHT}", self.police_option, (200, 200, 200), config.WIDTH // 2, 200)
-            self.afficher_text("Changer Résolution", self.police_option, (255, 255, 255), config.WIDTH // 2, 335)
+            self.afficher_text("Changer les touches", self.police_option, (255, 255, 255), config.WIDTH // 2, 335)
             self.afficher_text("Retour au menu", self.police_option, (255, 255, 255), config.WIDTH // 2, 435)
-            self.afficher_text("Changer les touches", self.police_option, (255, 255, 255), config.WIDTH // 2, 535)
 
 
-            # pour le popup 
-            if self.resulo_panel_ouvert:
 
-                pygame.draw.rect(self.ecran, (44, 62, 80), fenetre_fond, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), fenetre_fond, 2, 10) # Bordure blanche
-
-                # options
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_1, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_1, 2, 10)
-                self.afficher_text("800 x 800", self.police_option, (255,255,255), config.WIDTH//2, 165)
-
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_2, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_2, 2, 10)
-                self.afficher_text("1024 x 768", self.police_option, (255,255,255), config.WIDTH//2, 225)
-
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_3, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_3, 2, 10)
-                self.afficher_text("1280 x 720", self.police_option, (255,255,255), config.WIDTH//2, 285)
-
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_4, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_4, 2, 10)
-                self.afficher_text("1366 x 768", self.police_option, (255,255,255), config.WIDTH//2, 345)
-
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_5, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_5, 2, 10)
-                self.afficher_text("1600 x 900", self.police_option, (255,255,255), config.WIDTH//2, 405)
-
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_6, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_6, 2, 10)
-                self.afficher_text("1920 x 1080", self.police_option, (255,255,255), config.WIDTH//2, 465)
-
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_7, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_7, 2, 10)
-                self.afficher_text("2560 x 1440", self.police_option, (255,255,255), config.WIDTH//2, 525)
-                
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_your_reso, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_your_reso, 2, 10)
-                self.afficher_text("Your resolution", self.police_option, (255, 255, 255), config.WIDTH//2, 645)
-
-                # annulé
-                pygame.draw.rect(self.ecran, (231, 76, 60), opt_fermer, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_fermer, 2, 10)
-                self.afficher_text("Fermer", self.police_option, (255,255,255), config.WIDTH//2, 715)
-
-            if self.resulo_panel_ouvert == True and is_fullScreen == False :
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
-                self.afficher_text("Full Screen", self.police_option, (255, 255, 255), config.WIDTH//2, 585)
-            
-            elif self.resulo_panel_ouvert == True and is_fullScreen == True :
-                pygame.draw.rect(self.ecran, (52, 152, 219), opt_fullscreen, 0, 10)
-                pygame.draw.rect(self.ecran, (255, 255, 255), opt_fullscreen, 2, 10)
-                self.afficher_text("Windowed", self.police_option, (255, 255, 255), config.WIDTH//2, 585)
-                
-                
             # ---------------- ca c est pour pop up de clavier ----------------
             if self.clavier_panel_ouvert:
                 # Fond du popup

@@ -79,9 +79,7 @@ class Lvl08:
             for plat in self.plateformes:
                 pygame.draw.rect(self.ecran, (139, 90, 43), plat)
             pygame.draw.rect(self.ecran, (138, 190, 185), self.finished_rect)
-            pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x, self.personnage.y, 
-                            self.personnage.width, self.personnage.height))
+            self.personnage.draw(self.ecran)
             
             if self.personnage.x + self.personnage.width > self.finished_rect.x and self.personnage.x < self.finished_rect.x + self.finished_rect.width and self.personnage.y + self.personnage.height > self.finished_rect.y and self.personnage.y < self.finished_rect.y + self.finished_rect.height:
                 return "win"

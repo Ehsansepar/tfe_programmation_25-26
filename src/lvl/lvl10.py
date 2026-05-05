@@ -83,9 +83,7 @@ class Lvl10:
             pygame.draw.rect(self.ecran, (255, 215, 0), self.finished_rect)
             pygame.draw.rect(self.ecran, (255, 255, 255), self.finished_rect, 3)
             
-            pygame.draw.rect(self.ecran, self.personnage.color, 
-                           (self.personnage.x, self.personnage.y, 
-                            self.personnage.width, self.personnage.height))
+            self.personnage.draw(self.ecran)
             
             # Titre au centre
             self.afficher_text("🔥 NIVEAU FINAL 🔥", self.police_titre, (255, 215, 0), WIDTH // 2, 40)

@@ -14,16 +14,17 @@ class Lvl02:
         self.police = pygame.font.SysFont('Arial', 20, bold=True)
         self.police_titre = pygame.font.SysFont('Arial', 30, bold=True)
     
-        self.sol = Sol(size=(3000, 20), coulor=(193, 120, 90), pos_x=0, pos_y=config.HEIGHT-100)
+        self.sol = Sol(size=(config.WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=config.HEIGHT-100)
         
-        self.finished_rect = pygame.Rect(2500, config.HEIGHT-150, 50, 100)
+        self.finished_rect = pygame.Rect(180, 60, 50, 100) # Placé sur la plus haute plateforme
 
+        # Nouvelle disposition pour un niveau sur un seul écran
         self.plateformes = [
-            pygame.Rect(300, 500, 200, 20),
-            pygame.Rect(700, 450, 200, 20),
-            pygame.Rect(1100, 400, 200, 20),
-            pygame.Rect(1500, 350, 200, 20),
-            pygame.Rect(1900, 300, 200, 20),
+            pygame.Rect(150, 580, 150, 20),  # 1ère marche (on part du sol à 700)
+            pygame.Rect(400, 470, 150, 20),  # 2ème marche (vers la droite)
+            pygame.Rect(600, 360, 100, 20),  # 3ème marche (tout à droite)
+            pygame.Rect(350, 260, 150, 20),  # 4ème marche (retour vers la gauche)
+            pygame.Rect(150, 160, 150, 20),  # 5ème marche (en haut à gauche, sous la ligne d'arrivée)
         ]
         
 
@@ -71,23 +72,7 @@ class Lvl02:
             self.personnage.move()
             self.personnage.verifier_platforme(self.plateformes)
 
-            self.milieu_ecran = config.WIDTH // 2
-            self.decalage = 0
-            
-            if self.personnage.x > self.milieu_ecran :
-                self.decalage = self.personnage.x - self.milieu_ecran
-                self.personnage.x = self.milieu_ecran
-            
-            elif self.personnage.x < self.milieu_ecran and self.sol.rect.x < 0:
-                self.decalage = self.personnage.x - self.milieu_ecran
-                self.personnage.x = self.milieu_ecran
 
-            if self.decalage != 0 :
-                self.finished_rect.x -= self.decalage
-                self.sol.rect.x -= self.decalage
-
-                for plat in self.plateformes:
-                    plat.x = plat.x - self.decalage
 
         #.  reso actuel
             self.sol.rect.y = config.HEIGHT - 100
@@ -108,7 +93,7 @@ class Lvl02:
             
             
             
-            pygame.draw.rect(self.ecran, self.personnage.color, (self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height))
+            self.personnage.draw(self.ecran)
 
             player_rect = pygame.Rect(self.personnage.x, self.personnage.y, self.personnage.width, self.personnage.height)
 

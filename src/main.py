@@ -9,8 +9,6 @@ from classes.sol import Sol
 from classes.welcome import Welcome
 from classes.login import Login
 from classes.inscription import Inscription
-from classes.session import Session
-import data.save_manager as save_manager
 
 # Import des niveaux
 from lvl.lvl01 import Lvl01
@@ -35,6 +33,7 @@ clock = pygame.time.Clock()
 
 sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
 
+# Vitesse automatique selon Windows/Mac
 personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=PLAYER_SPEED)
 
 finished_rect = pygame.Rect(pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100))
@@ -68,12 +67,13 @@ while running:
         elif keys[pygame.K_m] :
             page = "menu"
 
-        dt = clock.tick(FPS) / 1000.0  # delta time en secondes
-        personnage.move(dt)
+        personnage.move()
         ecran.fill((0, 0, 0))  
 
-        pygame.draw.rect(ecran, personnage.color, (personnage.x, personnage.y, personnage.width, personnage.height))
+        # pygame.draw.rect(ecran, personnage.color, (personnage.x, personnage.y, personnage.width, personnage.height))
 
+        personnage.draw(ecran)
+        
         afficher_text("END = Quitter", police, (255, 0, 0), WIDTH // 2, 10)
 
         pygame.draw.rect(ecran, sol.color, sol.rect)
@@ -122,10 +122,6 @@ while running:
         result = page_login.run_login(personnage)
         if result == "quit" :
             running = False
-        elif result == "welcome" :
-            page = "welcome"
-        elif result == "menu" :
-            page = "menu"
 
     elif page == "inscription" :
         page_inscription = Inscription(ecran) 
@@ -207,12 +203,6 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
-            if Session.username != '':
-                try:
-                    lvl_num = int(page.replace('level', ''))
-                    save_manager.update_niveau(Session.username, lvl_num + 1)
-                except ValueError:
-                    pass
             page = "win"
 
     elif page == "level2":

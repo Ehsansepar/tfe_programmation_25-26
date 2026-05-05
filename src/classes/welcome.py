@@ -7,6 +7,7 @@
 import pygame 
 import data.config as config
 from classes.session import Session
+import mysql.connector
 
 
 
@@ -31,7 +32,19 @@ class Welcome() :
 
 
 
-        # Retiré: code MySQL
+        mydb = mysql.connector.connect(
+        host="mysql-sepaehs.alwaysdata.net",
+        user="sepaehs",
+        password="onuq7256",
+        ssl_disabled=True,
+        database="sepaehs_tfe_web"
+        )
+
+        mycursor = mydb.cursor()
+
+        mycursor.execute("SELECT prenom FROM users where id='14'")
+
+        self.myresult = mycursor.fetchall()
         
         
         
@@ -116,9 +129,10 @@ class Welcome() :
             self.ecran.fill((0, 119, 182))
 
             if Session.username != '' :
-                self.afficher_text(f"Bienvenue {Session.username}", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
+                # self.afficher_text(f"Bienvenue {Session.username}", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
+                self.afficher_text(f"Bienvenue {self.myresult}", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
             else :
-                self.afficher_text("Bienvenue !", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
+                self.afficher_text("Bienvenue no username!", h1_police, (255, 215, 0), config.WIDTH // 2, 150)
                 
 
             pygame.draw.rect(self.ecran, couleur_btn_connecter, self.rect_connecter, border_radius=10)
@@ -132,3 +146,4 @@ class Welcome() :
             
             
             pygame.display.flip()
+            print(self.myresult)

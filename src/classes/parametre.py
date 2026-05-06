@@ -37,7 +37,8 @@ class Parametre:
             mouse_pos = pygame.mouse.get_pos()
 
             rect_clavier = pygame.Rect(config.WIDTH // 2 - 150, 300, 300, 70)
-            rect_retour = pygame.Rect(config.WIDTH // 2 - 150, 400, 300, 70)
+            rect_reinitialiser_niveaux = pygame.Rect(config.WIDTH // 2 - 150, 400, 300, 70)
+            rect_retour = pygame.Rect(config.WIDTH // 2 - 150, 480, 300, 70)
 
             # Popup Clavier
             fenetre_clavier = pygame.Rect(config.WIDTH // 2 - 275, 135, 550, 600)
@@ -47,6 +48,9 @@ class Parametre:
             rect_gauche = pygame.Rect(config.WIDTH // 2 + 30, 430, 120, 50)
             opt_fermer_clavier = pygame.Rect(config.WIDTH // 2 - 100, 520, 200, 50)
 
+            #popup Reinitialiser
+            fenetre_reinitialiser = pygame.Rect(config.WIDTH // 2 - 275, 135, 550, 600)
+            
 
 
             for event in pygame.event.get():
@@ -68,6 +72,12 @@ class Parametre:
                         self.rect_left_active = False
                 
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                    if rect_reinitialiser_niveaux.collidepoint(event.pos):
+                        f = open("src/data/data.txt", "w")
+                        f.write("1") # Le niveau par défaut est 1, pas 0
+                        f.close()
+                        print("Tous les niveaux ont été réinitialisés à 1")
 
                     if self.clavier_panel_ouvert:
                         if opt_fermer_clavier.collidepoint(event.pos):
@@ -116,16 +126,18 @@ class Parametre:
                 couleur_retour = (236, 112, 99)
 
 
-            if not (rect_retour.collidepoint(mouse_pos) or rect_clavier.collidepoint(mouse_pos)):
+            if not (rect_retour.collidepoint(mouse_pos) or rect_clavier.collidepoint(mouse_pos) or rect_reinitialiser_niveaux.collidepoint(mouse_pos)):
                 memoire_bouton = ""
 
             pygame.draw.rect(self.ecran, couleur_retour, rect_retour, 0, 20)
             pygame.draw.rect(self.ecran, (0,100,0), rect_clavier, 0, 50)
+            pygame.draw.rect(self.ecran, (200,50,50), rect_reinitialiser_niveaux, 0, 20) # On dessine le bouton ici !
 
             # Textes
             self.afficher_text("Paramètres", self.police_titre, (253, 252, 220), config.WIDTH // 2, 80)
             self.afficher_text("Changer les touches", self.police_option, (255, 255, 255), config.WIDTH // 2, 335)
-            self.afficher_text("Retour au menu", self.police_option, (255, 255, 255), config.WIDTH // 2, 435)
+            self.afficher_text("Tout réinitialiser", self.police_option, (255, 255, 255), config.WIDTH // 2, 435) # Y=435 pour centrer
+            self.afficher_text("Retour au menu", self.police_option, (255, 255, 255), config.WIDTH // 2, 515) # Y=515 pour centrer
 
 
 
@@ -222,8 +234,6 @@ class Parametre:
                 pygame.draw.rect(self.ecran, (231, 76, 60), opt_fermer_clavier, 0, 10)
                 pygame.draw.rect(self.ecran, (255, 255, 255), opt_fermer_clavier, 2, 10)
                 self.afficher_text("Fermer", self.police_petite, (255, 255, 255), config.WIDTH // 2, 545)
-
-                
 
 
 

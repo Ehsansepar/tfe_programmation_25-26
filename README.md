@@ -9,7 +9,7 @@
 
 **Un jeu de plateforme 2D complet développé en Python avec Pygame, doté d'un système de niveaux, d'authentification et de sprites animés !**
 
-*Projet de TFE (Travail de Fin d'Études) - Programmation par Ehsan Separ*
+_Projet de TFE (Travail de Fin d'Études) - Programmation par Ehsan Separ_
 
 [🎯 Fonctionnalités](#-fonctionnalités) •
 [🚀 Installation](#-installation) •
@@ -32,6 +32,7 @@ Cette nouvelle mise à jour majeure apporte un système de menus complet, des in
 ## ✨ Fonctionnalités (Mise à jour majeure !)
 
 ### 🎯 Nouvelles Implémentations
+
 - ✅ **10 Niveaux Complets** - Design unique en écran fixe avec plateformes, obstacles, et arrière-plans personnalisés.
 - ✅ **Système de Progression & Verrouillage** - Sauvegarde de la progression locale (`data.txt`), les niveaux suivants sont verrouillés jusqu'à la victoire.
 - ✅ **Interface Utilisateur Premium** - Menus interactifs guidés par l'image, curseurs personnalisés au survol (pointeur / cadenas pour les niveaux bloqués).
@@ -41,6 +42,7 @@ Cette nouvelle mise à jour majeure apporte un système de menus complet, des in
 - ✅ **Menus Paramètres** - Pour la personnalisation et la consultation des contrôles (Z, Q, S, D, Espace).
 
 ### 🔜 Prochaines Étapes
+
 - 🔄 Intégration d'ennemis mouvants et de pièges (scies, pics).
 - 🔄 Système de score ou de pièces à collecter.
 - 🔄 Musique d'ambiance globale.
@@ -50,6 +52,7 @@ Cette nouvelle mise à jour majeure apporte un système de menus complet, des in
 ## 🚀 Installation
 
 ### Prérequis
+
 - Python 3.10 ou supérieur
 - Bibliothèque Pygame
 
@@ -68,6 +71,7 @@ pip install pygame
 # 4. Lancer le jeu (depuis la racine du projet)
 python src/main.py
 ```
+
 > **Note** : Au premier lancement, le jeu vous demandera votre système d'exploitation (Windows ou Mac) dans la console pour adapter automatiquement la vitesse et la gravité en fonction de votre taux de rafraîchissement (FPS).
 
 ---
@@ -76,15 +80,16 @@ python src/main.py
 
 ### Contrôles par défaut
 
-| Touche | Action |
-|--------|--------|
+| Touche                   | Action                                   |
+| ------------------------ | ---------------------------------------- |
 | `Q` / `D` (ou `←` / `→`) | Déplacement horizontal (Gauche / Droite) |
-| `Espace` / `Z` (ou `↑`) | Sauter |
-| `S` (ou `↓`) | Descendre plus vite |
-| `M` | Retour au Menu Principal (en jeu) |
-| `Fin` (End) | Quitter le jeu |
+| `Espace` / `Z` (ou `↑`)  | Sauter                                   |
+| `S` (ou `↓`)             | Descendre plus vite                      |
+| `M`                      | Retour au Menu Principal (en jeu)        |
+| `Fin` (End)              | Quitter le jeu                           |
 
 ### Objectif
+
 Atteindre la zone d'arrivée (bloc de fin) en évitant de tomber pour gagner le niveau et débloquer le suivant !
 
 ---
@@ -114,12 +119,15 @@ tfe_programmation_25-26/
 ## 🛠️ Architecture Technique
 
 ### 1. Programmation Orientée Objet (POO)
+
 Le code est strictement divisé en classes indépendantes. Chaque interface (Menu, Level, Settings) et chaque entité (Personnage, Sol, Niveau) possède sa propre classe. Cela permet un code clair et facile à maintenir.
 
 ### 2. Machine à États (State Machine)
+
 La gestion des pages dans `main.py` repose sur un système d'états dynamiques (`page = "menu"`, `"game"`, `"win"`, `"level2"`, etc.) permettant une navigation fluide entre les différentes scènes de l'application (du menu aux 10 niveaux, puis à l'écran de victoire) sans surcharger la mémoire.
 
 ### 3. Adaptation du Framerate (Le Hack de Vitesse)
+
 Face à la limitation matérielle de 60 FPS sur les écrans Mac (contre plus de 120 FPS sur Windows), une calibration est effectuée au démarrage dans `config.py`. Les constantes telles que `PLAYER_SPEED`, `PLAYER_GRAVITY` et `PLAYER_JUMP` sont ajustées pour que le personnage parcoure la même distance dans le même temps, quel que soit le PC !
 
 ---
@@ -130,7 +138,7 @@ Face à la limitation matérielle de 60 FPS sur les écrans Mac (contre plus de 
 
 **Ehsan Separ**
 
-*Étudiant en programmation*
+_Étudiant en programmation_
 
 [![GitHub](https://img.shields.io/badge/GitHub-Ehsansepar-181717?style=for-the-badge&logo=github)](https://github.com/Ehsansepar)
 
@@ -142,6 +150,7 @@ Face à la limitation matérielle de 60 FPS sur les écrans Mac (contre plus de 
 
 **⭐ Si ce projet vous plaît, n'hésitez pas à laisser une étoile ! ⭐**
 
-*Fait avec ❤️, beaucoup de ☕, et des dizaines de hitboxes ajustées au pixel près !*
+_Fait avec ❤️, beaucoup de ☕, et des dizaines de hitboxes ajustées au pixel près !_
 
 </div>
+<!-- test -->

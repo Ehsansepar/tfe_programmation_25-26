@@ -10,7 +10,7 @@ from classes.welcome import Welcome
 from classes.login import Login
 from classes.inscription import Inscription
 
-# Import des niveaux
+
 from lvl.lvl01 import Lvl01
 from lvl.lvl02 import Lvl02
 from lvl.lvl03 import Lvl03
@@ -24,7 +24,6 @@ from lvl.lvl10 import Lvl10
 
 
 pygame.init()
-# ecran = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 ecran = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mon Jeu Pygame")
 clock = pygame.time.Clock()
@@ -33,7 +32,6 @@ clock = pygame.time.Clock()
 
 sol = Sol(size=(WIDTH, 20), coulor=(193, 120, 90), pos_x=0, pos_y=HEIGHT-100)
 
-# Vitesse automatique selon Windows/Mac
 personnage = Personnage(x=100, y=300, width=50, height=50, color=(0, 128, 255), speed=PLAYER_SPEED)
 
 finished_rect = pygame.Rect(pygame.Rect(WIDTH-100, HEIGHT-150, 50, 100))
@@ -42,6 +40,17 @@ def afficher_text(text, font, text_col, x, y) :
     img = font.render(text, True, text_col)
     ecran.blit(img, (x, y))
 
+def verifier_et_sauvegarder_niveau(niveau_gagne):
+    nouveau_niveau = niveau_gagne + 1
+    
+    f = open("src/data/data.txt", "r")
+    niveau_max = int(f.read())
+    f.close()
+    
+    if nouveau_niveau > niveau_max:
+        f = open("src/data/data.txt", "w")
+        f.write(str(nouveau_niveau))
+        f.close()
 
 police = pygame.font.SysFont('Arial', 30)
 
@@ -69,28 +78,13 @@ while running:
 
         personnage.move()
         ecran.fill((0, 0, 0))  
-
-        # pygame.draw.rect(ecran, personnage.color, (personnage.x, personnage.y, personnage.width, personnage.height))
-
+        
         personnage.draw(ecran)
         
         afficher_text("END = Quitter", police, (255, 0, 0), WIDTH // 2, 10)
 
         pygame.draw.rect(ecran, sol.color, sol.rect)
         finished_block = pygame.draw.rect(ecran, (138, 190, 185), finished_rect)
-
-        # === CHEAT CODE ICI (dans le bon endroit) ===
-        pos_souris = pygame.mouse.get_pos()
-        souris_est_cliquee = pygame.mouse.get_pressed()
-
-        if finished_block.collidepoint(pos_souris):
-            pygame.draw.rect(ecran, (100, 255, 0), finished_block)
-            afficher_text("Ne triche pas, flemmard ! ", police_pour_notre_cheat, (255, 100, 100), WIDTH // 2 - 150, HEIGHT // 2 - 50)
-            afficher_text("c est just pour tester gagner.py j ai flemme de faire tout le temps gagner ! 🤣", police_pour_notre_cheat, (255, 100, 100), WIDTH // 2 - 350, HEIGHT // 2 - 100)
-            if souris_est_cliquee[0]:
-                souris_est_cliquee = [0, 0, 0]
-                page = "win"
-        # === FIN DU CHEAT CODE ===
 
         if personnage.x + personnage.width > finished_rect.x and personnage.x < finished_rect.x + finished_rect.width and personnage.y + personnage.height > finished_rect.y and personnage.y < finished_rect.y + finished_rect.height :
             afficher_text("END = Quitter", police, (0, 255, 0), WIDTH // 2, HEIGHT // 2)
@@ -203,6 +197,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            verifier_et_sauvegarder_niveau(1)
             page = "win"
 
     elif page == "level2":
@@ -215,6 +210,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            verifier_et_sauvegarder_niveau(2)
             page = "win"
 
     elif page == "level3":
@@ -227,6 +223,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            verifier_et_sauvegarder_niveau(3)
             page = "win"
 
     elif page == "level4":

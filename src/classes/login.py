@@ -1,6 +1,5 @@
 import pygame
 
-
 class Login :
     def __init__(self, ecran) :
         self.ecran = ecran
@@ -12,8 +11,7 @@ class Login :
                 if event.type == pygame.QUIT :
                     return "quit"
 
-
             self.ecran.fill((0, 150, 80))
+
             pygame.display.flip()
-        
-        
+

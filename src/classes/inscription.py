@@ -4,7 +4,7 @@ from classes.session import Session
 class Inscription :
     def __init__(self, ecran):
         self.ecran = ecran
-        
+
         self.police = pygame.font.Font(None, 40)
         self.user_username = ''
         self.rect_username = pygame.Rect(233, 308, 353, 44)
@@ -13,17 +13,15 @@ class Inscription :
         self.user_pass = ''
         self.rect_password = pygame.Rect(234, 407, 353, 44)
         self.rect_password_color_border = (255, 255, 255)
-        
+
         self.rect_active_username = False
         self.rect_active_password = False
-    
+
         self.show_error = False
         self.rect_enter = pygame.Rect(295, 503, 219, 44)
 
-
         self.button_police = pygame.font.Font(None, 36)
         self.rect_back = pygame.Rect(44, 44, 151, 44)
-        
 
     def afficher_text(self, text, font, text_col, x, y) :
         img = font.render(text, True, text_col)
@@ -31,10 +29,17 @@ class Inscription :
 
     def run_inscription(self, ecran) :
         while True :
-            for event in pygame.event.get() : 
-                if event.type == pygame.QUIT : 
+            mouse_pos = pygame.mouse.get_pos()
+            
+            if self.rect_username.collidepoint(mouse_pos) or self.rect_password.collidepoint(mouse_pos) or self.rect_enter.collidepoint(mouse_pos) or self.rect_back.collidepoint(mouse_pos):
+                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
+            else:
+                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+
+            for event in pygame.event.get() :
+                if event.type == pygame.QUIT :
                     return "quit"
-                
+
                 if event.type == pygame.MOUSEBUTTONDOWN :
                     if self.rect_username.collidepoint(event.pos) :
                         self.rect_active_username = True
@@ -43,7 +48,6 @@ class Inscription :
                     elif self.rect_password.collidepoint(event.pos) :
                         self.rect_active_password = True
                         self.rect_active_username = False
-                    
 
                     else :
                         self.rect_active_username = False
@@ -53,14 +57,11 @@ class Inscription :
                         if self.user_username != '' and self.user_pass != '':
                             Session.username = self.user_username  # Sauvegarde le username
                             print(f"""Username : {self.user_username}\nPassword : {self.user_pass}""")
-                            return "welcome" 
-                    
+                            return "welcome"
+
                     if self.rect_back.collidepoint(event.pos) :
                         return "menu"
 
-                
-
-                
                 if event.type == pygame.KEYDOWN :
                     if event.key == pygame.K_BACKSPACE :
                         if self.rect_active_username :
@@ -74,27 +75,26 @@ class Inscription :
                             print("input user : ", self.user_username)
                             print("Password : ", self.user_pass)
 
-                        elif self.user_username == '' or self.user_pass == '' : 
+                        elif self.user_username == '' or self.user_pass == '' :
                             print("remplis tout")
                             self.show_error = True
-                            
-                    else : 
+
+                    else :
                         if self.rect_active_username :
                             self.user_username += event.unicode
                         elif self.rect_active_password :
                             self.user_pass += event.unicode
 
-
             self.ecran.fill((180, 80, 0))
 
             if self.rect_active_username :
                 self.rect_username_color_border = (255, 255, 255)
-            else : 
+            else :
                 self.rect_username_color_border = (190, 190, 190)
 
             if self.rect_active_password :
                 self.rect_password_color_border = (255, 255, 255)
-            else : 
+            else :
                 self.rect_password_color_border = (190, 190, 190)
 
             self.afficher_text("Username", self.police, (255, 255, 255), 236, 286)
@@ -102,10 +102,9 @@ class Inscription :
             text_surface = self.police.render(self.user_username, True, (255,255,255))
             ecran.blit(text_surface, (self.rect_username.x + 5, self.rect_username.y + 5))
 
-
             self.afficher_text("Password", self.police, (255, 255, 255), 237, 382)
             pygame.draw.rect(ecran, self.rect_password_color_border, self.rect_password, 2)
-            password_masque = '*' * len(self.user_pass)  
+            password_masque = '*' * len(self.user_pass)
             text_surface_password = self.police.render(password_masque, True, (255, 255, 255))
             ecran.blit(text_surface_password, (self.rect_password.x + 5, self.rect_password.y + 5))
 
@@ -115,10 +114,7 @@ class Inscription :
             if self.show_error:
                 self.afficher_text("Remplis tout", self.police, (255, 0, 0), 320, 472)
 
-
-
             pygame.draw.rect(self.ecran, (200, 10, 0), self.rect_back, border_radius=10)
             self.afficher_text("Back", self.button_police, (255, 255, 255), self.rect_back.centerx, self.rect_back.centery)
-
 
             pygame.display.flip()

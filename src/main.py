@@ -57,6 +57,7 @@ police = pygame.font.SysFont('Arial', 30)
 police_pour_notre_cheat = pygame.font.SysFont('Arial', 20)
 
 page = "menu"
+niveau_actuel = 1
 running = True
 while running:
     if page == "game" :
@@ -129,14 +130,15 @@ while running:
             
 
     elif page == "win" :
-        page_gagner = Gagner(ecran)
+        page_gagner = Gagner(ecran, niveau_termine=niveau_actuel)
         result = page_gagner.run_gagner(personnage)
         if result == "quit":
             running = False
         elif result == "menu":
             page = "menu"
-        elif result == "level" :
-            page = "level"
+        elif result and result.startswith("level"):
+            personnage.mettre_a_pos_initiale()
+            page = result
 
 
 # ------------------------------------------------------------------------------
@@ -177,12 +179,9 @@ while running:
             page = "menu"
         elif result == "quit":
             running = False
-        # elif result.startswith("level"): #il charche le mots en premier de phrase 
-        #     # https://www.w3schools.com/python/ref_string_startswith.asp
-        #     personnage.mettre_a_pos_initiale()
-        #     page = result
         else :
             personnage.mettre_a_pos_initiale()
+            niveau_actuel = int(result.replace("level", ""))
             page = result
 
 # ------------------------------------------------------------------------------
@@ -198,6 +197,7 @@ while running:
             running = False
         elif result == "win":
             verifier_et_sauvegarder_niveau(1)
+            niveau_actuel = 1
             page = "win"
 
     elif page == "level2":
@@ -211,6 +211,7 @@ while running:
             running = False
         elif result == "win":
             verifier_et_sauvegarder_niveau(2)
+            niveau_actuel = 2
             page = "win"
 
     elif page == "level3":
@@ -224,6 +225,7 @@ while running:
             running = False
         elif result == "win":
             verifier_et_sauvegarder_niveau(3)
+            niveau_actuel = 3
             page = "win"
 
     elif page == "level4":
@@ -236,6 +238,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 4
             page = "win"
 
     elif page == "level5":
@@ -248,6 +251,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 5
             page = "win"
 
     elif page == "level6":
@@ -260,6 +264,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 6
             page = "win"
 
     elif page == "level7":
@@ -272,6 +277,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 7
             page = "win"
 
     elif page == "level8":
@@ -284,6 +290,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 8
             page = "win"
 
     elif page == "level9":
@@ -296,6 +303,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 9
             page = "win"
 
     elif page == "level10":
@@ -308,6 +316,7 @@ while running:
         elif result == "quit":
             running = False
         elif result == "win":
+            niveau_actuel = 10
             page = "win"
 
     elif page == "quit":
